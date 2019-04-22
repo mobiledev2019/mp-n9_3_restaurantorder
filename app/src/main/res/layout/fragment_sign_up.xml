@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_32"
+        android:background="@drawable/ic_knife_and_fork"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TextAppearance.AppCompat.Display1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_32"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_32"
+        android:gravity="center_horizontal"
+        android:text="@string/text_sign_up"
+        android:textColor="@color/color_orange_800"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/text_full_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <EditText
+        android:id="@+id/text_full_name"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_32"
+        android:background="@drawable/bg_edittext_landing"
+        android:drawableLeft="@drawable/ic_person_orange_small"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/text_full_name"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:padding="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/text_dob"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/bg_edittext_landing"
+        android:drawableLeft="@drawable/ic_date_orange_small"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/text_date_of_birth"
+        android:inputType="datetime"
+        android:maxLines="1"
+        android:padding="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/text_full_name" />
+
+    <EditText
+        android:id="@+id/text_email"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/bg_edittext_landing"
+        android:drawableLeft="@drawable/ic_email_orange_small"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/text_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/text_dob" />
+
+    <EditText
+        android:id="@+id/text_phone_number"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/bg_edittext_landing"
+        android:drawableLeft="@drawable/ic_phone_orange_small"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/text_phone_number"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:padding="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/text_email" />
+
+    <EditText
+        android:id="@+id/text_password"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/bg_edittext_landing"
+        android:drawableLeft="@drawable/ic_password_orange_small"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/text_phone_number" />
+
+    <EditText
+        android:id="@+id/text_confirmed_password"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/bg_edittext_landing"
+        android:drawableLeft="@drawable/ic_password_orange_small"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
+
+    <Button
+        android:id="@+id/button"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_32"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:background="@drawable/bg_button_landing"
+        android:text="@string/text_sign_up"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/text_confirmed_password" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_back_to"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        style="@android:style/TextAppearance.Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/text_sign_in"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/text_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:textColor="@color/color_orange_800"
+        android:textStyle="bold"
+        style="@android:style/TextAppearance.Medium"
+        android:text="@string/text_sign_in_underline"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RestaurantOrder</string>
+    <!--landing-->
+    <string name="text_sign_up">Sign Up</string>
+    <string name="text_full_name">Full name</string>
+    <string name="text_date_of_birth">Date of birth</string>
+    <string name="text_email">Email</string>
+    <string name="text_phone_number">Phone number</string>
+    <string name="text_back_to">Back to </string>
+    <string name="text_sign_up_underline"><u>\u0020 Sign Up</u></string>
+    <string name="text_sign_in_underline"><u>\u0020 Sign In</u></string>
+</resources>
