@@ -6,7 +6,15 @@
     <string name="text_date_of_birth">Date of birth</string>
     <string name="text_email">Email</string>
     <string name="text_phone_number">Phone number</string>
-    <string name="text_back_to">Back to </string>
-    <string name="text_sign_up_underline"><u>\u0020 Sign Up</u></string>
-    <string name="text_sign_in_underline"><u>\u0020 Sign In</u></string>
+    <string name="text_back_to">Back to \u0020</string>
+    <string name="text_sign_up_underline"><u>Sign Up</u></string>
+    <string name="text_sign_in_underline"><u>Sign In</u></string>
+    <string name="text_confirmed_password">Confirmed password</string>
+    <string name="text_password">Password</string>
+    <string name="text_sign_in">Sign In</string>
+    <string name="text_have_account_yet">Do not have an account?\u0020</string>
+    <string name="text_sign_up_success">Registration Successful</string>
+    <string name="text_sign_up_existed">Email address has already been registered</string>
+    <string name="text_sign_up_failed">Registration failed. Please try again later</string>
+    <string name="text_sign_in_failed">Sign in failed. Please check your email or password again</string>
 </resources>
