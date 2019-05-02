@@ -3,6 +3,7 @@ package com.e15cn2.restaurantorder.utils;
 import android.databinding.BindingAdapter;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -43,5 +44,19 @@ public class BindingUtils {
         }
         currency = String.format("%s đ", currency);
         textView.setText(currency);
+    }
+    @BindingAdapter({"isCheckedOff"})
+    public static void setCheckedButtonOff(RadioButton checkedButton, int status) {
+        if (status == Constants.JsonItemKey.IS_OFF)
+            checkedButton.setChecked(true);
+        else checkedButton.setChecked(false);
+
+    }
+
+    @BindingAdapter({"isCheckedOn"})
+    public static void setCheckedButtonOn(RadioButton checkedButton, int status) {
+        if (status == Constants.JsonItemKey.IS_ON)
+            checkedButton.setChecked(true);
+        else checkedButton.setChecked(false);
     }
 }

@@ -20,7 +20,7 @@ public class ItemRemoteDataSource implements ItemDataSouce.Remote {
     }
 
     @Override
-    public Call<ResponseBody> addItem(String name, String menu, double price,String desc, String imageName, String imageCode) {
+    public Call<ResponseBody> addItem(String name, String menu, double price, String desc, String imageName, String imageCode) {
         return addItemAdmin(name, menu, price, desc, imageName, imageCode);
     }
 
@@ -29,13 +29,23 @@ public class ItemRemoteDataSource implements ItemDataSouce.Remote {
         return getItemAdmin();
     }
 
+    @Override
+    public Call<ResponseBody> updateItemStatus(int id, int status) {
+        return updateStatus(id,status);
+    }
+
     private Call<ResponseBody> addItemAdmin(String name, String menu, double price, String desc, String imageName, String imageCode) {
         Call<ResponseBody> call = AppConfig.getApiConfig().addItem(name, menu, price, desc, imageName, imageCode);
         return call;
     }
 
     private Call<List<Item>> getItemAdmin() {
-        Call<List<Item>> call = AppConfig.getApiConfig().getItemAdmin();
+        Call<List<Item>> call = AppConfig.getApiConfig().getItemsAdmin();
+        return call;
+    }
+
+    private Call<ResponseBody> updateStatus(int id, int status) {
+        Call<ResponseBody> call = AppConfig.getApiConfig().updateItemStatus(id, status);
         return call;
     }
 }

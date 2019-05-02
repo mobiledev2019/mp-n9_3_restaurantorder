@@ -21,5 +21,7 @@ public interface ItemDataSouce {
                                    String imageCode);
 
         Call<List<Item>> getItems();
+
+        Call<ResponseBody> updateItemStatus(int id, int status);
     }
 }

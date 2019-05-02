@@ -37,7 +37,7 @@ public class MenuRemoteDataSource implements MenuDataSource.Remote {
     }
 
     private Call<List<Menu>> getMenusAdmin(){
-        Call<List<Menu>> call = AppConfig.getApiConfig().getMenuAdmin();
+        Call<List<Menu>> call = AppConfig.getApiConfig().getMenusAdmin();
         return call;
     }
 }

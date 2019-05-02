@@ -34,7 +34,7 @@ public interface ApiConfig {
                                @Field(Constants.JsonMenuKey.IMAGE_CODE) String imageCode);
 
     @GET(Constants.Network.ADMIN_GET_MENU)
-    Call<List<Menu>> getMenuAdmin();
+    Call<List<Menu>> getMenusAdmin();
 
     @FormUrlEncoded
     @POST(Constants.Network.ADD_ITEM)
@@ -45,6 +45,11 @@ public interface ApiConfig {
                                @Field(Constants.JsonItemKey.IMAGE_NAME) String imageName,
                                @Field(Constants.JsonItemKey.IMAGE_CODE) String imageCode);
 
-    @GET(Constants.Network.ADMIN_GET_MENU)
-    Call<List<Item>> getItemAdmin();
+    @GET(Constants.Network.ADMIN_GET_ITEMS)
+    Call<List<Item>> getItemsAdmin();
+
+    @FormUrlEncoded
+    @POST(Constants.Network.UPDATE_ITEM_STATUS)
+    Call<ResponseBody> updateItemStatus(@Field(Constants.JsonItemKey.ID) int id,
+                                        @Field(Constants.JsonItemKey.STATUS) int status);
 }

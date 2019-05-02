@@ -1,6 +1,7 @@
 package com.e15cn2.restaurantorder.screen.main.admin.menu;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +15,7 @@ import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_item.AddItemFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_menu.AddMenuFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.item.ItemFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 
 import java.util.List;
@@ -28,9 +30,21 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
     private Animation mFabRotateBackward;
     private boolean isFabOpen = false;
     private List<Menu> mMenus;
+    private OnMenuClickListener mCallback;
 
     public static MenuFragment newInstance() {
         return new MenuFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (OnMenuClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnMenuClickListener");
+        }
     }
 
     @Override
@@ -63,7 +77,12 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     public void onMenuClicked(Menu menu, int position) {
-        //TODO
+        ActivityUtils.replaceFragment(
+                getFragmentManager(),
+                R.id.frame_main,
+                ItemFragment.newInstance(menu)
+        );
+        mCallback.onMenuClicked(menu);
     }
 
     @Override
@@ -134,5 +153,9 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
     @SuppressLint("RestrictedApi")
     private void setFabAddGone() {
         binding.fabAdd.setVisibility(View.GONE);
+    }
+
+    public interface OnMenuClickListener {
+        void onMenuClicked(Menu menu);
     }
 }

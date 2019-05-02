@@ -7,4 +7,6 @@
     <color name="color_orange_900">#E65100</color>
     <color name="color_grey_100">#FAFAFA</color>
     <color name="color_grey_300">#E0E0E0</color>
+    <color name="color_grey_900">#212121</color>
+    <color name="color_light_green_800">#558B2F</color>
 </resources>

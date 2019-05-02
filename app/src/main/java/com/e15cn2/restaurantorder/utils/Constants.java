@@ -8,7 +8,8 @@ public class Constants {
         public static final String ADD_MENU = "add_menu.php";
         public static final String ADMIN_GET_MENU = "get_menu.php";
         public static final String ADD_ITEM = "add_item.php";
-        public static final String ADMIN_GET_ITEM = "admin_get_item";
+        public static final String ADMIN_GET_ITEMS = "admin_get_items.php";
+        public static final String UPDATE_ITEM_STATUS = "update_item_status.php";
     }
 
     public class JSonKey {
@@ -41,6 +42,8 @@ public class Constants {
     }
 
     public class JsonItemKey {
+        public static final int IS_ON = 1;
+        public static final int IS_OFF = 0;
         public static final String ID = "id";
         public static final String NAME = "name";
         public static final String MENU = "menu";

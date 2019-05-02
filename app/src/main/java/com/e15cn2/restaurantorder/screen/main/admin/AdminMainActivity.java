@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.data.model.Menu;
 import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.databinding.ActivityMainBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseActivity;
@@ -27,7 +28,8 @@ import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        MenuFragment.OnMenuClickListener {
     public static final String EXTRA_USER =
             "com.e15cn2.restaurantorder.screen.main.admin.EXTRA_USER";
     private User mUser;
@@ -164,5 +166,10 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
                 getSupportFragmentManager(),
                 R.id.frame_main,
                 MenuFragment.newInstance());
+    }
+
+    @Override
+    public void onMenuClicked(Menu menu) {
+        binding.includeAppBarMain.textToolbarTitle.setText(menu.getName());
     }
 }
