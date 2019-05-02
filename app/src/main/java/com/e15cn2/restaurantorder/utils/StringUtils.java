@@ -3,6 +3,7 @@ package com.e15cn2.restaurantorder.utils;
 import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,4 +78,10 @@ public class StringUtils {
         return isEmail;
     }
 
+    public static String appendTimeToString(String name) {
+        Date calendar = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmssddMMyy");
+        String newName = dateFormat.format(calendar).concat("_" + name);
+        return newName;
+    }
 }

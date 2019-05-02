@@ -17,4 +17,20 @@
     <string name="text_sign_up_existed">Email address has already been registered</string>
     <string name="text_sign_up_failed">Registration failed. Please try again later</string>
     <string name="text_sign_in_failed">Sign in failed. Please check your email or password again</string>
+    <!--drawer-->
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="action_menu">Menu</string>
+    <string name="text_more">More</string>
+    <string name="action_sign_out">Sign Out</string>
+    <!--add_menu-->
+    <string name="text_title_add_menu">Add New Menu</string>
+    <string name="text_upload_image"><u>Upload Image</u></string>
+    <string name="text_enter_menu_name">Enter menu name</string>
+    <string name="text_add_menu_failed">Menu is not added. Try again please!</string>
+    <string name="text_add_menu_success">Menu is added</string>
+    <string name="text_notify_upload_image">Please choose an Image</string>
+    <!--menu-->
+    <string name="text_title_menu">Menu</string>
+
 </resources>

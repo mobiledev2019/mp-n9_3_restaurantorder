@@ -15,6 +15,7 @@ public class User implements Parcelable {
     private String mEmail;
     private String mPhone;
     private String mPassword;
+    private String mImage;
     private int mIsAdmin;
 
     public User(Builder builder) {
@@ -24,6 +25,7 @@ public class User implements Parcelable {
         mEmail = builder.mEmail;
         mPhone = builder.mPhone;
         mPassword = builder.mPassword;
+        mImage = builder.mImage;
         mIsAdmin = builder.mIsAdmin;
     }
 
@@ -34,8 +36,10 @@ public class User implements Parcelable {
         mEmail = jsonObject.getString(Constants.JsonUserKey.EMAIL);
         mPhone = jsonObject.getString(Constants.JsonUserKey.PHONE);
         mPassword = jsonObject.getString(Constants.JsonUserKey.PASSWORD);
+        mImage = jsonObject.getString(Constants.JsonUserKey.IMAGE);
         mIsAdmin = jsonObject.getInt(Constants.JsonUserKey.IS_ADMIN);
     }
+
     protected User(Parcel in) {
         mId = in.readLong();
         mName = in.readString();
@@ -43,6 +47,7 @@ public class User implements Parcelable {
         mEmail = in.readString();
         mPhone = in.readString();
         mPassword = in.readString();
+        mImage = in.readString();
         mIsAdmin = in.readInt();
     }
 
@@ -82,6 +87,14 @@ public class User implements Parcelable {
         return mPassword;
     }
 
+    public String getImage() {
+        return mImage;
+    }
+
+    public void setImage(String image) {
+        mImage = image;
+    }
+
     public int getIsAdmin() {
         return mIsAdmin;
     }
@@ -99,6 +112,7 @@ public class User implements Parcelable {
         dest.writeString(mEmail);
         dest.writeString(mPhone);
         dest.writeString(mPassword);
+        dest.writeString(mImage);
         dest.writeInt(mIsAdmin);
     }
 
@@ -109,6 +123,7 @@ public class User implements Parcelable {
         private String mEmail;
         private String mPhone;
         private String mPassword;
+        private String mImage;
         private int mIsAdmin;
 
         public Builder() {
@@ -141,6 +156,11 @@ public class User implements Parcelable {
 
         public Builder setPassword(String password) {
             mPassword = password;
+            return this;
+        }
+
+        public Builder setImage(String image) {
+            mImage = image;
             return this;
         }
 

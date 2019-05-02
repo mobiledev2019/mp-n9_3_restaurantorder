@@ -3,6 +3,7 @@
     package="com.e15cn2.restaurantorder">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".screen.home.HomeActivity"></activity>
+        <activity
+            android:name=".screen.main.admin.AdminMainActivity"
+            android:theme="@style/MyTheme"></activity>
         <activity android:name=".screen.landing.LandingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

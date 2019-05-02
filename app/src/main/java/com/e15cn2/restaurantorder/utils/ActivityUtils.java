@@ -12,10 +12,15 @@ import android.widget.EditText;
 
 public class ActivityUtils {
     public static void replaceFragment(FragmentManager manager, int container, Fragment fragment) {
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        String backStateName = fragment.getClass().getName();
+        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
+        if (!fragmentPopped) {
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(container, fragment);
+            transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            transaction.addToBackStack(backStateName);
+            transaction.commit();
+        }
     }
 
     public static void hideSoftKeyboard(final Activity activity, View view) {

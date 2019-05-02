@@ -1,6 +1,7 @@
 package com.e15cn2.restaurantorder.screen.landing.sign_in;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.e15cn2.restaurantorder.R;
@@ -9,10 +10,11 @@ import com.e15cn2.restaurantorder.data.repository.UserRepository;
 import com.e15cn2.restaurantorder.data.source.remote.UserRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentSignInBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
-import com.e15cn2.restaurantorder.screen.home.HomeActivity;
 import com.e15cn2.restaurantorder.screen.landing.sign_up.SignUpFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.AdminMainActivity;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.Constants;
+import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
 import com.e15cn2.restaurantorder.utils.StringUtils;
 
 public class SignInFragment extends BaseFragment<FragmentSignInBinding>
@@ -50,18 +52,17 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
             binding.textEmail.setText(getArguments().getString(ARGUMENT_EMAIL));
             binding.textPassword.setText(getArguments().getString(ARGUMENT_PASSWORD));
         }
+        onSignInSaved();
     }
 
     @Override
     public void showUser(User user) {
-        //TODO
         mUser = user;
     }
 
     @Override
     public void showMessage(String msg) {
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
-            //TODO
             onSignInSuccess(mUser);
         } else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.text_sign_in_failed), Toast.LENGTH_SHORT).show();
@@ -93,7 +94,25 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
     }
 
     private void onSignInSuccess(User user) {
-        startActivity(HomeActivity.getHomeIntent(getActivity(), user));
-        getActivity().finish();
+        SharedPreferenceUtils.getInstance(getActivity()).saveSignInState(true);
+        SharedPreferenceUtils.getInstance(getActivity()).saveUser(mUser);
+        if (user.getIsAdmin() == Constants.UserKey.IS_ADMIN) {
+            startActivity(AdminMainActivity.getAdminMainIntent(getActivity(), user));
+            getActivity().finish();
+        } else {
+            //TODO
+        }
+    }
+
+    private void onSignInSaved() {
+        User user = SharedPreferenceUtils.getInstance(getActivity()).getUser();
+        if (user.getIsAdmin() == Constants.UserKey.IS_ADMIN) {
+            if (SharedPreferenceUtils.getInstance(getActivity()).getSignInState()) {
+                startActivity(AdminMainActivity.getAdminMainIntent(getActivity(), user));
+                getActivity().finish();
+            }
+        } else {
+            //TODO
+        }
     }
 }
