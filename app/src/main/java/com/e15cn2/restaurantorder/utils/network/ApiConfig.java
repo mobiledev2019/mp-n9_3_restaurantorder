@@ -1,5 +1,6 @@
 package com.e15cn2.restaurantorder.utils.network;
 
+import com.e15cn2.restaurantorder.data.model.Item;
 import com.e15cn2.restaurantorder.data.model.Menu;
 import com.e15cn2.restaurantorder.utils.Constants;
 
@@ -34,4 +35,16 @@ public interface ApiConfig {
 
     @GET(Constants.Network.ADMIN_GET_MENU)
     Call<List<Menu>> getMenuAdmin();
+
+    @FormUrlEncoded
+    @POST(Constants.Network.ADD_ITEM)
+    Call<ResponseBody> addItem(@Field(Constants.JsonItemKey.NAME) String name,
+                               @Field(Constants.JsonItemKey.MENU) String menu,
+                               @Field(Constants.JsonItemKey.PRICE) double price,
+                               @Field(Constants.JsonItemKey.DESCRIPTION) String description,
+                               @Field(Constants.JsonItemKey.IMAGE_NAME) String imageName,
+                               @Field(Constants.JsonItemKey.IMAGE_CODE) String imageCode);
+
+    @GET(Constants.Network.ADMIN_GET_MENU)
+    Call<List<Item>> getItemAdmin();
 }

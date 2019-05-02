@@ -1,5 +1,7 @@
 package com.e15cn2.restaurantorder.screen.main.admin.menu;
 
+import android.annotation.SuppressLint;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -10,6 +12,7 @@ import com.e15cn2.restaurantorder.data.source.remote.MenuRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentRecyclerViewBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.add_item.AddItemFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_menu.AddMenuFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 
@@ -24,6 +27,7 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
     private Animation mFabRotateForward;
     private Animation mFabRotateBackward;
     private boolean isFabOpen = false;
+    private List<Menu> mMenus;
 
     public static MenuFragment newInstance() {
         return new MenuFragment();
@@ -47,6 +51,7 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     public void showMenus(List<Menu> menus) {
+        mMenus = menus;
         mAdapter.setDatas(menus);
     }
 
@@ -67,6 +72,18 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
         return true;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setFabAddVisible();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        setFabAddGone();
+    }
+
     public void clickFabAdd() {
         animateFab();
     }
@@ -81,7 +98,10 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     public void clickFabItem() {
         animateFab();
-        //TODO
+        ActivityUtils.replaceFragment(
+                getFragmentManager(),
+                R.id.frame_main,
+                AddItemFragment.newInstance(mMenus));
     }
 
     private void animateFab() {
@@ -104,5 +124,15 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
             binding.fabItem.setClickable(true);
             isFabOpen = true;
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void setFabAddVisible() {
+        binding.fabAdd.setVisibility(View.VISIBLE);
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void setFabAddGone() {
+        binding.fabAdd.setVisibility(View.GONE);
     }
 }

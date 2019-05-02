@@ -18,6 +18,7 @@ import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.databinding.ActivityMainBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseActivity;
 import com.e15cn2.restaurantorder.screen.landing.LandingActivity;
+import com.e15cn2.restaurantorder.screen.main.admin.add_item.AddItemFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_menu.AddMenuFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
@@ -57,10 +58,7 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
     public void onBackPressed() {
         if (mFragmentClassName.equals(MenuFragment.class.getName())) {
             return;
-        } else {
-            super.onBackPressed();
-        }
-        if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
+        } else if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
             binding.drawerMain.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -156,6 +154,8 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
             setToggleState();
         } else if (mFragmentClassName.equals(AddMenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_menu));
+        } else if (mFragmentClassName.equals(AddItemFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_item));
         }
     }
 

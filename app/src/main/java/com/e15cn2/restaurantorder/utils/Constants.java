@@ -7,6 +7,8 @@ public class Constants {
         public static final String SIGN_UP = "sign_up.php";
         public static final String ADD_MENU = "add_menu.php";
         public static final String ADMIN_GET_MENU = "get_menu.php";
+        public static final String ADD_ITEM = "add_item.php";
+        public static final String ADMIN_GET_ITEM = "admin_get_item";
     }
 
     public class JSonKey {
@@ -33,6 +35,18 @@ public class Constants {
     public class JsonMenuKey {
         public static final String ID = "id";
         public static final String NAME = "name";
+        public static final String IMAGE = "image";
+        public static final String IMAGE_NAME = "image_name";
+        public static final String IMAGE_CODE = "image_code";
+    }
+
+    public class JsonItemKey {
+        public static final String ID = "id";
+        public static final String NAME = "name";
+        public static final String MENU = "menu";
+        public static final String PRICE = "price";
+        public static final String DESCRIPTION = "description";
+        public static final String STATUS = "status";
         public static final String IMAGE = "image";
         public static final String IMAGE_NAME = "image_name";
         public static final String IMAGE_CODE = "image_code";

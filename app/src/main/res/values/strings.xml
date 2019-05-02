@@ -29,8 +29,16 @@
     <string name="text_enter_menu_name">Enter menu name</string>
     <string name="text_add_menu_failed">Menu is not added. Try again please!</string>
     <string name="text_add_menu_success">Menu is added</string>
-    <string name="text_notify_upload_image">Please choose an Image</string>
+    <string name="text_notify_upload_image">Please choose an image</string>
     <!--menu-->
     <string name="text_title_menu">Menu</string>
-
+    <!--add_item-->
+    <string name="text_title_add_item">Add New Item</string>
+    <string name="text_add_item_failed">Item is not added. Try again please!</string>
+    <string name="text_add_item_success">Item is added</string>
+    <string name="text_choose_item_menu">Choose Item Menu</string>
+    <string name="text_enter_item_name">Enter item name</string>
+    <string name="text_enter_price">Enter price</string>
+    <string name="text_write_some_description">Write some description . . .</string>
+    <string name="text_notify_choose_menu">Please choose a menu</string>
 </resources>

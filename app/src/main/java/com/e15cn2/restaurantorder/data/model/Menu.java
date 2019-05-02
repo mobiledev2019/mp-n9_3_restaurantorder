@@ -65,11 +65,8 @@ public class Menu implements Serializable, Parcelable {
     }
 
     public static class Builder {
-        @SerializedName(Constants.JsonMenuKey.ID)
         private int mId;
-        @SerializedName(Constants.JsonMenuKey.NAME)
         private String mName;
-        @SerializedName(Constants.JsonMenuKey.IMAGE)
         private String mImage;
 
         public Builder setId(int id) {
