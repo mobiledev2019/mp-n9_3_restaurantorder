@@ -41,4 +41,7 @@
     <string name="text_enter_price">Enter price</string>
     <string name="text_write_some_description">Write some description . . .</string>
     <string name="text_notify_choose_menu">Please choose a menu</string>
+    <!--facebook-->
+    <string name="facebook_app_id">2285342594856895</string> <string name="fb_login_protocol_scheme">fb2285342594856895</string>
+
 </resources>

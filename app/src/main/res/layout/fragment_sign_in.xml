@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,7 +9,7 @@
             type="com.e15cn2.restaurantorder.screen.landing.sign_in.SignInFragment" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -118,9 +119,9 @@
                     android:layout_marginEnd="@dimen/dp_16"
                     android:layout_marginRight="@dimen/dp_16"
                     android:background="@drawable/bg_button_landing"
+                    android:onClick="@{()->listener.signIn()}"
                     android:text="@string/text_sign_in"
                     android:textAllCaps="false"
-                    android:onClick="@{()->listener.signIn()}"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -143,6 +144,7 @@
                     app:layout_constraintGuide_percent="0.9" />
 
                 <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
@@ -170,12 +172,76 @@
                         style="@android:style/TextAppearance.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_sign_up_underline"
                         android:onClick="@{()->listener.moveToSignUpScreen()}"
+                        android:text="@string/text_sign_up_underline"
                         android:textColor="@color/color_orange_800"
                         android:textStyle="bold" />
                 </LinearLayout>
 
+
+                <FrameLayout
+                    android:id="@+id/frame_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_32"
+                    android:layout_marginEnd="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:layout_marginBottom="@dimen/dp_32"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/frame_google"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/button_facebook_origin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_facebook"
+                        android:layout_width="@dimen/dp_32"
+                        android:layout_height="@dimen/dp_32"
+                        android:background="@drawable/ic_facebook"
+                        android:onClick="@{()->listener.onFacebookSignIn()}"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frame_google"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_32"
+                    android:layout_marginBottom="@dimen/dp_32"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline13"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <com.google.android.gms.common.SignInButton
+                        android:id="@+id/button_google_origin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_google"
+                        android:layout_width="@dimen/dp_32"
+                        android:layout_height="@dimen/dp_32"
+                        android:background="@drawable/ic_google"
+                        android:onClick="@{()->listener.onGoogleSignIn()}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline13"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                </FrameLayout>
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
             </android.support.constraint.ConstraintLayout>
 
         </ScrollView>

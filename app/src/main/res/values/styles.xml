@@ -23,4 +23,10 @@
     <style name="MyTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="MyTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="FacebookButton">
+        <item name="android:layout_height">@dimen/dp_32</item>
+        <item name="android:layout_width">@dimen/dp_32</item>
+        <item name="android:background">@drawable/ic_facebook</item>
+    </style>
 </resources>

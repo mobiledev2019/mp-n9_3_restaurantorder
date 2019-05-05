@@ -1,4 +1,5 @@
-package com.e15cn2.restaurantorder.screen.main.admin;
+package com.e15cn2.restaurantorder.screen.main.user;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,24 +20,22 @@ import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.databinding.ActivityMainBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseActivity;
 import com.e15cn2.restaurantorder.screen.landing.LandingActivity;
-import com.e15cn2.restaurantorder.screen.main.admin.add_item.AddItemFragment;
-import com.e15cn2.restaurantorder.screen.main.admin.add_menu.AddMenuFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
+public class UserMainActivity extends BaseActivity<ActivityMainBinding>
         implements NavigationView.OnNavigationItemSelectedListener,
         MenuFragment.OnMenuClickListener {
     public static final String EXTRA_USER =
-            "com.e15cn2.restaurantorder.screen.main.admin.EXTRA_USER";
+            "com.e15cn2.restaurantorder.screen.main.user.EXTRA_USER";
     private User mUser;
     private String mFragmentClassName;
 
-    public static Intent getAdminMainIntent(Context context, User user) {
-        Intent intent = new Intent(context, AdminMainActivity.class);
+    public static Intent getUserMainIntent(Context context, User user) {
+        Intent intent = new Intent(context, UserMainActivity.class);
         intent.putExtra(EXTRA_USER, user);
         return intent;
     }
@@ -160,10 +159,6 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
         if (mFragmentClassName.equals(MenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_menu));
             setToggleState();
-        } else if (mFragmentClassName.equals(AddMenuFragment.class.getName())) {
-            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_menu));
-        } else if (mFragmentClassName.equals(AddItemFragment.class.getName())) {
-            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_item));
         }
     }
 
