@@ -74,7 +74,7 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
             case R.id.action_menu:
-                actionMenu();
+                actionNavigation(MenuFragment.newInstance(mUser));
                 break;
             case R.id.action_sign_out:
                 signOut();
@@ -158,7 +158,7 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
         mFragmentClassName = fragment.getClass().getName();
         setActionBar();
         if (mFragmentClassName.equals(MenuFragment.class.getName())) {
-            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_menu));
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_menu));
             setToggleState();
         } else if (mFragmentClassName.equals(AddMenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_menu));
@@ -167,10 +167,11 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
         }
     }
 
-    private void actionMenu() {
+    private void actionNavigation(Fragment fragment) {
         ActivityUtils.replaceFragment(
                 getSupportFragmentManager(),
                 R.id.frame_main,
-                MenuFragment.newInstance());
+                fragment);
+
     }
 }
