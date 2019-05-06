@@ -15,11 +15,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ItemPresenter implements ItemContract.Presenter {
+public class AdminItemPresenter implements AdminItemContract.Presenter {
     private ItemRepository mRepository;
-    private ItemContract.View mView;
+    private AdminItemContract.View mView;
 
-    public ItemPresenter(ItemRepository repository, ItemContract.View view) {
+    public AdminItemPresenter(ItemRepository repository, AdminItemContract.View view) {
         mRepository = repository;
         mView = view;
     }

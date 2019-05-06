@@ -2,12 +2,15 @@ package com.e15cn2.restaurantorder.screen.main.admin.menu;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Menu;
+import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.data.repository.MenuRepository;
 import com.e15cn2.restaurantorder.data.source.remote.MenuRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentRecyclerViewBinding;
@@ -15,13 +18,17 @@ import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_item.AddItemFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_menu.AddMenuFragment;
-import com.e15cn2.restaurantorder.screen.main.admin.item.ItemFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.item.AdminItemFragment;
+import com.e15cn2.restaurantorder.screen.main.user.item.UserItemFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 
 import java.util.List;
 
+import static com.e15cn2.restaurantorder.utils.Constants.UserKey.IS_ADMIN;
+
 public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
         implements MenuContract.View, OnMenuClickListener {
+    private static final String ARGUMENT_USER = "ARGUMENT_USER";
     private MenuPresenter mPresenter;
     private BaseAdapter<Menu> mAdapter;
     private Animation mFabOpen;
@@ -31,9 +38,14 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
     private boolean isFabOpen = false;
     private List<Menu> mMenus;
     private OnMenuClickListener mCallback;
+    private User mUser;
 
-    public static MenuFragment newInstance() {
-        return new MenuFragment();
+    public static MenuFragment newInstance(User user) {
+        MenuFragment fragment = new MenuFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(ARGUMENT_USER, user);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -59,8 +71,13 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
         mPresenter.getMenus();
         mAdapter = new BaseAdapter<>(getActivity(), R.layout.item_menu);
         mAdapter.setListener(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setAdapter(mAdapter);
         binding.setListenerMenuFrag(this);
+        if (getArguments() != null) {
+            mUser = getArguments().getParcelable(ARGUMENT_USER);
+        }
     }
 
     @Override
@@ -77,11 +94,19 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     public void onMenuClicked(Menu menu, int position) {
-        ActivityUtils.replaceFragment(
-                getFragmentManager(),
-                R.id.frame_main,
-                ItemFragment.newInstance(menu)
-        );
+        if (mUser.getIsAdmin() == IS_ADMIN) {
+            ActivityUtils.replaceFragment(
+                    getFragmentManager(),
+                    R.id.frame_main,
+                    AdminItemFragment.newInstance(menu)
+            );
+        } else {
+            ActivityUtils.replaceFragment(
+                    getFragmentManager(),
+                    R.id.frame_main,
+                    UserItemFragment.newInstance(menu));
+
+        }
         mCallback.onMenuClicked(menu);
     }
 
@@ -94,7 +119,9 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
     @Override
     public void onStart() {
         super.onStart();
-        setFabAddVisible();
+        if (mUser.getIsAdmin()==IS_ADMIN){
+            setFabAddVisible();
+        }
     }
 
     @Override

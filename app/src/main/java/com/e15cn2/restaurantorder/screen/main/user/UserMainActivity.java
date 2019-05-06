@@ -21,6 +21,7 @@ import com.e15cn2.restaurantorder.databinding.ActivityMainBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseActivity;
 import com.e15cn2.restaurantorder.screen.landing.LandingActivity;
 import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
+import com.e15cn2.restaurantorder.screen.main.user.home.UserHomeFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
 
@@ -50,6 +51,7 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
         if (getIntent() != null) {
             mUser = getIntent().getParcelableExtra(EXTRA_USER);
             setUserInfor(mUser);
+            actionNavigation(UserHomeFragment.newInstance(mUser));
         }
         setActionBar();
         fragmentListener();
@@ -57,7 +59,8 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
 
     @Override
     public void onBackPressed() {
-        if (mFragmentClassName.equals(MenuFragment.class.getName())) {
+        if (mFragmentClassName.equals(MenuFragment.class.getName())||
+                mFragmentClassName.equals(UserHomeFragment.class.getName())) {
             return;
         } else if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
             binding.drawerMain.closeDrawer(GravityCompat.START);
@@ -72,8 +75,11 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
+            case R.id.action_home:
+                actionNavigation(UserHomeFragment.newInstance(mUser));
+                break;
             case R.id.action_menu:
-                actionMenu();
+                actionNavigation(MenuFragment.newInstance(mUser));
                 break;
             case R.id.action_sign_out:
                 signOut();
@@ -156,16 +162,23 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
     private void updateTitle(Fragment fragment) {
         mFragmentClassName = fragment.getClass().getName();
         setActionBar();
-        if (mFragmentClassName.equals(MenuFragment.class.getName())) {
-            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_menu));
+        if (mFragmentClassName.equals(UserHomeFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_home));
             setToggleState();
+            binding.navMain.getMenu().getItem(0).setChecked(true);
+        } else if (mFragmentClassName.equals(MenuFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_menu));
+            setToggleState();
+            binding.navMain.getMenu().getItem(1).setChecked(true);
         }
     }
 
-    private void actionMenu() {
+    private void actionNavigation(Fragment fragment) {
         ActivityUtils.replaceFragment(
                 getSupportFragmentManager(),
                 R.id.frame_main,
-                MenuFragment.newInstance());
+                fragment);
+
     }
+
 }

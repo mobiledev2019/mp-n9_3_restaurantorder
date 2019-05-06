@@ -2,6 +2,7 @@ package com.e15cn2.restaurantorder.screen.main.admin.item;
 
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Item;
@@ -16,14 +17,14 @@ import com.e15cn2.restaurantorder.utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
-        implements ItemContract.View, OnItemClickListener {
+public class AdminItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
+        implements AdminItemContract.View, AdminOnItemClickListener {
     private static final String ARGUMENT_MENU = "ARGUMENT_MENU";
-    private ItemContract.Presenter mPresenter;
+    private AdminItemContract.Presenter mPresenter;
     private BaseAdapter<Item> mAdapter;
 
-    public static ItemFragment newInstance(Menu menu) {
-        ItemFragment fragment = new ItemFragment();
+    public static AdminItemFragment newInstance(Menu menu) {
+        AdminItemFragment fragment = new AdminItemFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARGUMENT_MENU, menu);
         fragment.setArguments(args);
@@ -37,11 +38,13 @@ public class ItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     protected void initData() {
-        mPresenter = new ItemPresenter(
+        mPresenter = new AdminItemPresenter(
                 ItemRepository.getInstance(ItemRemoteDataSource.getInstance()), this);
         mPresenter.getItems();
-        mAdapter = new BaseAdapter<>(getActivity(), R.layout.item_item);
+        mAdapter = new BaseAdapter<>(getActivity(), R.layout.item_item_admin);
         mAdapter.setListener(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.addItemDecoration(
                 new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(mAdapter);
@@ -68,10 +71,11 @@ public class ItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     public void showMessage(String msg) {
+        //Delete action
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
             mPresenter.getItems();
         } else {
-         //TODO handle error action
+            //TODO handle error action
         }
     }
 
@@ -88,11 +92,11 @@ public class ItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     public void onButtonOnClicked(Item item, int position) {
-        mPresenter.updateItemStatus(item.getId(),Constants.JsonItemKey.IS_ON);
+        mPresenter.updateItemStatus(item.getId(), Constants.JsonItemKey.IS_ON);
     }
 
     @Override
     public void onButtonOffClicked(Item item, int position) {
-        mPresenter.updateItemStatus(item.getId(),Constants.JsonItemKey.IS_OFF);
+        mPresenter.updateItemStatus(item.getId(), Constants.JsonItemKey.IS_OFF);
     }
 }

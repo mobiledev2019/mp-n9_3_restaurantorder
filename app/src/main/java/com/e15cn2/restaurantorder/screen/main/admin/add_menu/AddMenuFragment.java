@@ -87,10 +87,7 @@ public class AddMenuFragment extends BaseFragment<FragmentAddMenuBinding>
     public void showMessage(String msg) {
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.text_add_menu_success), Toast.LENGTH_SHORT).show();
-            ActivityUtils.replaceFragment(
-                    getFragmentManager(),
-                    R.id.frame_main,
-                    MenuFragment.newInstance());
+            getFragmentManager().popBackStack();
         } else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.text_add_menu_failed), Toast.LENGTH_SHORT).show();
         }

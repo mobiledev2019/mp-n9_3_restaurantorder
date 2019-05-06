@@ -4,7 +4,7 @@ import com.e15cn2.restaurantorder.data.model.Item;
 
 import java.util.List;
 
-public interface ItemContract {
+public interface AdminItemContract {
     interface Presenter {
         void getItems();
         void updateItemStatus(int id, int status);

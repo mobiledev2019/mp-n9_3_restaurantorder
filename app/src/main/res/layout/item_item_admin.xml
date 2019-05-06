@@ -15,7 +15,7 @@
 
         <variable
             name="listener"
-            type="com.e15cn2.restaurantorder.screen.main.admin.item.OnItemClickListener" />
+            type="com.e15cn2.restaurantorder.screen.main.admin.item.AdminOnItemClickListener" />
     </data>
 
     <android.support.constraint.ConstraintLayout
