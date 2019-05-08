@@ -69,7 +69,7 @@
                 android:textColor="#FFFfff"
                 android:textStyle="bold"
                 android:typeface="monospace"
-                app:isCheckedOff="@{item.status}" />
+                app:isCheckedSwitchOff="@{item.status}" />
 
             <RadioButton
                 android:id="@+id/btnOn"
@@ -86,7 +86,7 @@
                 android:textColor="#ffffff"
                 android:textStyle="bold"
                 android:typeface="monospace"
-                app:isCheckedOn="@{item.status}" />
+                app:isCheckedSwitchOn="@{item.status}" />
         </RadioGroup>
 
         <android.support.constraint.ConstraintLayout

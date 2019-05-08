@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.e15cn2.restaurantorder.screen.main.admin.add_table.AddTableFragment" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/text_number"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="32dp"
+            android:background="@android:drawable/edit_text"
+            android:ems="10"
+            android:hint="@string/text_enter_table_number"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_16"
+            app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintStart_toStartOf="@+id/guideline11"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@android:drawable/edit_text"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_16"
+            app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline11"
+            app:layout_constraintTop_toBottomOf="@+id/text_number">
+
+            <Spinner
+                android:id="@+id/spinner_table_type"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:id="@+id/image_down_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_drop_down" />
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/button_save"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginBottom="@dimen/dp_32"
+            android:background="@drawable/bg_button_landing"
+            android:onClick="@{()->listener.saveTable()}"
+            android:text="@string/text_save"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintStart_toStartOf="@+id/guideline11" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

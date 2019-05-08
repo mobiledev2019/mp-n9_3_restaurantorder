@@ -15,6 +15,9 @@ import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.Locale;
 
+import static com.e15cn2.restaurantorder.utils.Constants.JsonCommonKey.IS_OFF;
+import static com.e15cn2.restaurantorder.utils.Constants.JsonItemKey.IS_ON;
+
 public class BindingUtils {
     @BindingAdapter({"src"})
     public static void setImageRes(ImageView image, String url) {
@@ -45,7 +48,8 @@ public class BindingUtils {
         currency = String.format("%s đ", currency);
         textView.setText(currency);
     }
-    @BindingAdapter({"isCheckedOff"})
+
+    @BindingAdapter({"isCheckedSwitchOff"})
     public static void setCheckedButtonOff(RadioButton checkedButton, int status) {
         if (status == Constants.JsonItemKey.IS_OFF)
             checkedButton.setChecked(true);
@@ -53,10 +57,29 @@ public class BindingUtils {
 
     }
 
-    @BindingAdapter({"isCheckedOn"})
+    @BindingAdapter({"isCheckedSwitchOn"})
     public static void setCheckedButtonOn(RadioButton checkedButton, int status) {
-        if (status == Constants.JsonItemKey.IS_ON)
+        if (status == IS_ON)
             checkedButton.setChecked(true);
         else checkedButton.setChecked(false);
     }
+
+    @BindingAdapter({"srcTableType"})
+    public static void setTableImageByType(ImageView image, String type) {
+        if (type.equals(Constants.TableKey.TYPE_4_PEOPLES)) {
+            image.setImageResource(R.drawable.ic_table_4);
+        } else if (type.equals(Constants.TableKey.TYPE_6_PEOPLES)) {
+            image.setImageResource(R.drawable.ic_table_6);
+        }
+    }
+
+    @BindingAdapter({"tableStatus"})
+    public static void setTableStatus(ImageView image, int status) {
+        if (status == IS_ON) {
+            image.setImageResource(R.drawable.ic_status_green);
+        } else if (status == IS_OFF) {
+            image.setImageResource(R.drawable.ic_status_grey);
+        }
+    }
+
 }

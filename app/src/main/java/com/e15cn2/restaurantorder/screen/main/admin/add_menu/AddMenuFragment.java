@@ -17,8 +17,6 @@ import com.e15cn2.restaurantorder.data.repository.MenuRepository;
 import com.e15cn2.restaurantorder.data.source.remote.MenuRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentAddMenuBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
-import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
-import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.Constants;
 import com.e15cn2.restaurantorder.utils.RealPathUtils;
 import com.e15cn2.restaurantorder.utils.StringUtils;
