@@ -35,6 +35,6 @@ public class ItemRepository implements ItemDataSouce.Remote {
 
     @Override
     public Call<ResponseBody> updateItemStatus(int id, int status) {
-        return mRemote.updateItemStatus(id,status);
+        return mRemote.updateItemStatus(id, status);
     }
 }

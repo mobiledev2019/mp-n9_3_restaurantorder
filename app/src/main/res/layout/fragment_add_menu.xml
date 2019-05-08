@@ -140,7 +140,7 @@
             android:layout_marginBottom="@dimen/dp_32"
             android:background="@drawable/bg_button_landing"
             android:onClick="@{()->listener.saveMenu()}"
-            android:text="Save"
+            android:text="@string/text_save"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold"

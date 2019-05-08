@@ -40,10 +40,21 @@
     <string name="text_write_some_description">Write some description . . .</string>
     <string name="text_notify_choose_menu">Please choose a menu</string>
     <!--facebook-->
-    <string name="facebook_app_id">2285342594856895</string> <string name="fb_login_protocol_scheme">fb2285342594856895</string>
+    <string name="facebook_app_id">2285342594856895</string>
+    <string name="fb_login_protocol_scheme">fb2285342594856895</string>
     <!--user_home-->
     <string name="text_what_would_you_like">What would you like?</string>
     <string name="text_make_an_order">Make an order</string>
     <string name="text_reserve_a_table">Reserve a table</string>
     <string name="action_home">Home</string>
+    <!--table-->
+    <string name="action_table">Table</string>
+    <string name="action_add_new_table">Add new table</string>
+    <string name="text_enter_table_number">Enter table number</string>
+    <string name="text_add_table_failed">Table is not added. Try again please!</string>
+    <string name="text_add_table_success">Table is added</string>
+    <string name="text_save">Save</string>
+    <string name="text_table_type">Type of Table</string>
+    <string name="text_notify_choose_table_type">Please choose a type of table</string>
+
 </resources>

@@ -21,7 +21,9 @@ import com.e15cn2.restaurantorder.screen.base.BaseActivity;
 import com.e15cn2.restaurantorder.screen.landing.LandingActivity;
 import com.e15cn2.restaurantorder.screen.main.admin.add_item.AddItemFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_menu.AddMenuFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.add_table.AddTableFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.table.AdminTableFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
 
@@ -58,7 +60,8 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
 
     @Override
     public void onBackPressed() {
-        if (mFragmentClassName.equals(MenuFragment.class.getName())) {
+        if (mFragmentClassName.equals(MenuFragment.class.getName())
+                || mFragmentClassName.equals(AdminTableFragment.class.getName())) {
             return;
         } else if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
             binding.drawerMain.closeDrawer(GravityCompat.START);
@@ -75,6 +78,9 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
         switch (item.getItemId()) {
             case R.id.action_menu:
                 actionNavigation(MenuFragment.newInstance(mUser));
+                break;
+            case R.id.action_table:
+                actionNavigation(AdminTableFragment.newInstance());
                 break;
             case R.id.action_sign_out:
                 signOut();
@@ -160,10 +166,17 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
         if (mFragmentClassName.equals(MenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_menu));
             setToggleState();
+            binding.navMain.getMenu().getItem(1).setChecked(true);
         } else if (mFragmentClassName.equals(AddMenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_menu));
         } else if (mFragmentClassName.equals(AddItemFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_item));
+        } else if (mFragmentClassName.equals(AdminTableFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_table));
+            setToggleState();
+            binding.navMain.getMenu().getItem(2).setChecked(true);
+        } else if (mFragmentClassName.equals(AddTableFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_add_new_table));
         }
     }
 

@@ -2,6 +2,7 @@ package com.e15cn2.restaurantorder.utils.network;
 
 import com.e15cn2.restaurantorder.data.model.Item;
 import com.e15cn2.restaurantorder.data.model.Menu;
+import com.e15cn2.restaurantorder.data.model.Table;
 import com.e15cn2.restaurantorder.utils.Constants;
 
 import java.util.List;
@@ -52,4 +53,12 @@ public interface ApiConfig {
     @POST(Constants.Network.UPDATE_ITEM_STATUS)
     Call<ResponseBody> updateItemStatus(@Field(Constants.JsonItemKey.ID) int id,
                                         @Field(Constants.JsonItemKey.STATUS) int status);
+
+    @FormUrlEncoded
+    @POST(Constants.Network.ADD_TABLE)
+    Call<ResponseBody> addTable(@Field(Constants.JsonTableKey.NUMBER) String number,
+                                @Field(Constants.JsonTableKey.TYPE) String type);
+
+    @GET(Constants.Network.ADMIN_GET_TABLES)
+    Call<List<Table>> getTablesAdmin();
 }
