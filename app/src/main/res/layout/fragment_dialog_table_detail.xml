@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.TableDetailsDialogFragment" />
+
+        <variable
+            name="item"
+            type="com.e15cn2.restaurantorder.data.model.Table" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number: "
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView12"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="Type:"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView13"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="Status: "
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_32"
+            app:layout_constraintBottom_toBottomOf="@+id/textView13"
+            app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:tableStatus="@{item.status}" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_booking"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            app:layout_constraintVertical_bias="0.0"
+            app:recyclerTableBooking="@{item.tableBookings}" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="@dimen/dp_104"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_32"
+            android:layout_marginLeft="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:checkedButton="@id/btnOn"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_booking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/btnOff"
+                style="@android:style/TextAppearance.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_toggle_widget"
+                android:button="@null"
+                android:gravity="center"
+                android:lines="1"
+                android:onClick="@{()->listener.onButtonOffClick()}"
+                android:padding="@dimen/dp_4"
+                android:text="@string/text_off"
+                android:textColor="#FFFfff"
+                android:textStyle="bold"
+                app:isCheckedSwitchOff="@{item.status}" />
+
+            <RadioButton
+                android:id="@+id/btnOn"
+                style="@android:style/TextAppearance.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_toggle_widget"
+                android:button="@null"
+                android:gravity="center"
+                android:onClick="@{()->listener.onButtonOnClick()}"
+                android:padding="@dimen/dp_4"
+                android:text="@string/text_on"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                app:isCheckedSwitchOn="@{item.status}" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_32"
+            android:text="@{item.number}"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView16"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_32"
+            android:text="@{item.type}"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView12"
+            app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView12" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

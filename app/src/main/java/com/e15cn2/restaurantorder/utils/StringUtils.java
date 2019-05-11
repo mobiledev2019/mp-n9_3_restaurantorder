@@ -2,6 +2,7 @@ package com.e15cn2.restaurantorder.utils;
 
 import android.widget.EditText;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,6 +38,11 @@ public class StringUtils {
     public static String dateFormat(Date date) {
         String format = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
+
+    public static String timeFormat(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH : mm");
         return sdf.format(date);
     }
 
@@ -83,5 +89,22 @@ public class StringUtils {
         SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmssddMMyy");
         String newName = dateFormat.format(calendar).concat("_" + name);
         return newName;
+    }
+
+    public static int compareDate(String picked, String today) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date datePicked = null;
+        Date dateToday = null;
+        try {
+            datePicked = sdf.parse(picked);
+            dateToday = sdf.parse(today);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (datePicked.getTime() >= dateToday.getTime()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

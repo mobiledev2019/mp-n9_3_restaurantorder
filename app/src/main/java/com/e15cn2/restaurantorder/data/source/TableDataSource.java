@@ -16,5 +16,12 @@ public interface TableDataSource {
         Call<ResponseBody> addTable(String number, String type);
 
         Call<List<Table>> getTables();
+
+        Call<ResponseBody> reserveTable(String number,
+                                        String timeBooking,
+                                        String userName,
+                                        String userEmail,
+                                        String userPhone);
+        Call<ResponseBody> updateTableStatus(String number, int status);
     }
 }

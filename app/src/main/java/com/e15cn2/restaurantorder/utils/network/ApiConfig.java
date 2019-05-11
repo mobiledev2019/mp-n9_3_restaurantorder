@@ -61,4 +61,17 @@ public interface ApiConfig {
 
     @GET(Constants.Network.ADMIN_GET_TABLES)
     Call<List<Table>> getTablesAdmin();
+
+    @FormUrlEncoded
+    @POST(Constants.Network.RESERVE_TABLE)
+    Call<ResponseBody> reserveTable(@Field(Constants.JSonTableBookingKey.TABLE_NUMBER) String number,
+                                    @Field(Constants.JSonTableBookingKey.TIME_BOOKING) String timeBooking,
+                                    @Field(Constants.JSonTableBookingKey.USER_NAME) String userName,
+                                    @Field(Constants.JSonTableBookingKey.USER_EMAIL) String userEmail,
+                                    @Field(Constants.JSonTableBookingKey.USER_PHONE) String userPhone);
+
+    @FormUrlEncoded
+    @POST(Constants.Network.UPDATE_TABLE_STATUS)
+    Call<ResponseBody> updateTableStatus(@Field(Constants.JsonTableKey.NUMBER) String number,
+                                         @Field(Constants.JsonTableKey.STATUS) int status);
 }

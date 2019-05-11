@@ -29,13 +29,32 @@ public class TableRemoteDataSource implements TableDataSource.Remote {
         return getTablesAdmin();
     }
 
+    @Override
+    public Call<ResponseBody> reserveTable(String number, String timeBooking, String userName, String userEmail, String userPhone) {
+        return reserveTableUser(number, timeBooking, userName, userEmail, userPhone);
+    }
+
+    @Override
+    public Call<ResponseBody> updateTableStatus(String number, int status) {
+        return updateTableStatusAdmin(number,status);
+    }
+
     private Call<ResponseBody> addTableAdmin(String number, String type) {
         Call<ResponseBody> call = AppConfig.getApiConfig().addTable(number, type);
+        return call;
+    }
+
+    private Call<ResponseBody> reserveTableUser(String number, String timeBooking, String userName, String userEmail, String userPhone) {
+        Call<ResponseBody> call = AppConfig.getApiConfig().reserveTable(number, timeBooking, userName, userEmail, userPhone);
         return call;
     }
 
     private Call<List<Table>> getTablesAdmin() {
         Call<List<Table>> call = AppConfig.getApiConfig().getTablesAdmin();
         return call;
+    }
+
+    private Call<ResponseBody> updateTableStatusAdmin(String number, int status) {
+        return AppConfig.getApiConfig().updateTableStatus(number,status);
     }
 }

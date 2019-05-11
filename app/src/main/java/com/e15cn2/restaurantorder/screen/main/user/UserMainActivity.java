@@ -16,20 +16,24 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Menu;
+import com.e15cn2.restaurantorder.data.model.Table;
 import com.e15cn2.restaurantorder.data.model.User;
-import com.e15cn2.restaurantorder.databinding.ActivityMainBinding;
+import com.e15cn2.restaurantorder.databinding.ActivityUserMainBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseActivity;
 import com.e15cn2.restaurantorder.screen.landing.LandingActivity;
 import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.table.AdminTableFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.TablesListFragment;
 import com.e15cn2.restaurantorder.screen.main.user.home.UserHomeFragment;
+import com.e15cn2.restaurantorder.screen.main.user.table.UserTableFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserMainActivity extends BaseActivity<ActivityMainBinding>
+public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         implements NavigationView.OnNavigationItemSelectedListener,
-        MenuFragment.OnMenuClickListener {
+        MenuFragment.OnMenuClickListener, TablesListFragment.OnTableClickListener {
     public static final String EXTRA_USER =
             "com.e15cn2.restaurantorder.screen.main.user.EXTRA_USER";
     private User mUser;
@@ -43,7 +47,7 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_main;
+        return R.layout.activity_user_main;
     }
 
     @Override
@@ -59,8 +63,7 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
 
     @Override
     public void onBackPressed() {
-        if (mFragmentClassName.equals(MenuFragment.class.getName())||
-                mFragmentClassName.equals(UserHomeFragment.class.getName())) {
+        if (mFragmentClassName.equals(UserHomeFragment.class.getName())) {
             return;
         } else if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
             binding.drawerMain.closeDrawer(GravityCompat.START);
@@ -77,9 +80,6 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
         switch (item.getItemId()) {
             case R.id.action_home:
                 actionNavigation(UserHomeFragment.newInstance(mUser));
-                break;
-            case R.id.action_menu:
-                actionNavigation(MenuFragment.newInstance(mUser));
                 break;
             case R.id.action_sign_out:
                 signOut();
@@ -166,10 +166,10 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_home));
             setToggleState();
             binding.navMain.getMenu().getItem(0).setChecked(true);
+        } else if (mFragmentClassName.equals(UserTableFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_table));
         } else if (mFragmentClassName.equals(MenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_menu));
-            setToggleState();
-            binding.navMain.getMenu().getItem(1).setChecked(true);
         }
     }
 
@@ -181,4 +181,8 @@ public class UserMainActivity extends BaseActivity<ActivityMainBinding>
 
     }
 
+    @Override
+    public void onMakeAnOrder(Table table) {
+        actionNavigation(MenuFragment.newInstance(mUser));
+    }
 }

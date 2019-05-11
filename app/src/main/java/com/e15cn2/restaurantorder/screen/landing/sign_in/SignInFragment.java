@@ -106,7 +106,7 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
 
     @Override
     public void onSuccess(LoginResult loginResult) {
-        getResult();
+        handleFacebookSignResult();
     }
 
     @Override
@@ -145,7 +145,7 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+            handleGoogleSignInResult(task);
         }
     }
 
@@ -193,7 +193,7 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
         binding.buttonFacebookOrigin.registerCallback(callbackManager, this);
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+    private void handleGoogleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             if (account != null) {
@@ -210,7 +210,7 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
         }
     }
 
-    private void getResult() {
+    private void handleFacebookSignResult() {
         GraphRequest request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {

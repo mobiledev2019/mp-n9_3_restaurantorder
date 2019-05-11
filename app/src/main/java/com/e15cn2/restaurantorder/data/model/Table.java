@@ -50,6 +50,10 @@ public class Table implements Serializable, Parcelable {
         return mStatus;
     }
 
+    public void setStatus(int status) {
+        mStatus = status;
+    }
+
     public List<TableBooking> getTableBookings() {
         return mTableBookings;
     }

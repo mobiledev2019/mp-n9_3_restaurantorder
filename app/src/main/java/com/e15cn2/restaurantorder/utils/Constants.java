@@ -3,6 +3,7 @@ package com.e15cn2.restaurantorder.utils;
 public class Constants {
     public class Network {
         public static final String URL_BASE = "http://192.168.0.73:80/restaurant/";
+//                public static final String URL_BASE = "http://192.168.43.100:80/restaurant/";
         public static final String SIGN_IN = "sign_in.php";
         public static final String SIGN_UP = "sign_up.php";
         public static final String ADD_MENU = "add_menu.php";
@@ -12,6 +13,8 @@ public class Constants {
         public static final String UPDATE_ITEM_STATUS = "update_item_status.php";
         public static final String ADD_TABLE = "add_table.php";
         public static final String ADMIN_GET_TABLES = "admin_get_tables.php";
+        public static final String RESERVE_TABLE = "reserve_table.php";
+        public static final String UPDATE_TABLE_STATUS = "update_table_status.php";
     }
 
     public class JSonKey {
@@ -22,6 +25,7 @@ public class Constants {
 
     public class JsonCommonKey {
         public static final String ID = "id";
+        public static final String STATUS = "status";
         public static final String NAME = "name";
         public static final String IMAGE = "image";
         public static final String IMAGE_NAME = "image_name";
@@ -50,21 +54,22 @@ public class Constants {
         public static final String MENU = "menu";
         public static final String PRICE = "price";
         public static final String DESCRIPTION = "description";
-        public static final String STATUS = "status";
     }
 
-    public class JsonTableKey extends JsonItemKey {
+    public class JsonTableKey extends JsonCommonKey {
         public static final String TABLE_BOOKINGS = "table_bookings";
-        public static final String STATUS = "status";
         public static final String TYPE = "type";
         public static final String NUMBER = "number";
     }
 
-    public class JSonTableBookingKey extends JsonCommonKey{
+    public class JSonTableBookingKey extends JsonCommonKey {
         public static final String TABLE_NUMBER = "table_number";
         public static final String TIME_BOOKING = "time_booking";
+        public static final String USER_NAME = "user_name";
         public static final String USER_EMAIL = "user_email";
+        public static final String USER_PHONE = "user_phone";
     }
+
     public static class TableKey {
         public static final String TYPE_6_PEOPLES = "Table 6 People";
         public static final String TYPE_4_PEOPLES = "Table 4 People";

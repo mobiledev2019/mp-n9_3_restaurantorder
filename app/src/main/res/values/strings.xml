@@ -56,5 +56,22 @@
     <string name="text_save">Save</string>
     <string name="text_table_type">Type of Table</string>
     <string name="text_notify_choose_table_type">Please choose a type of table</string>
-
+    <string name="text_date_format">dd/mm/yyyy</string>
+    <string name="text_date_not_valid">Date is not valid. Please pick again.</string>
+    <string name="text_time_not_valid">Time is not valid. Please pick again.</string>
+    <string name="text_notify_pick_date_first">Please pick date first</string>
+    <string name="text_reserve">Reserve</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_inform_input_all_fields_dialog_reserve">Please input all fields for convenient. We will contact to you as soon as receive your reservation.</string>
+    <string name="text_from">\u0020From\u0020</string>
+    <string name="text_from_not_cap">\u0020from\u0020</string>
+    <string name="text_to">\u0020to\u0020</string>
+    <string name="text_number">Number:\u0020</string>
+    <string name="text_notifty_select_time_reserve">Please select time you want!</string>
+    <string name="text_ok">OK</string>
+    <string name="text_reserve_table_failed">Maybe has something wrong. Try again later!</string>
+    <string name="text_inform_reserve_success">Your reservation has been sent to us. We will contact to you as soon as possible. Thank you!</string>
+    <string name="text_on">On</string>
+    <string name="text_off">Off</string>
+    <string name="text_existed_reservation">Reservation has already existed!</string>
 </resources>

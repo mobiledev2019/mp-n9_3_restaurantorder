@@ -5,13 +5,22 @@
     <data>
 
         <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="listener"
+            type="com.e15cn2.restaurantorder.screen.main.admin.table.OnTableClickListener" />
+
+        <variable
             name="item"
             type="com.e15cn2.restaurantorder.data.model.Table" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{(view)->listener.onTableClicked(item,position)}">
 
         <ImageView
             android:id="@+id/imageView4"

@@ -50,12 +50,11 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout"
             app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
                 android:id="@+id/btnOff"
-                style="@android:style/TextAppearance.Medium"
+                style="@android:style/TextAppearance.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -65,10 +64,9 @@
                 android:lines="1"
                 android:onClick="@{(view)->listener.onButtonOffClicked(item,position)}"
                 android:padding="@dimen/dp_4"
-                android:text="Off"
+                android:text="@string/text_off"
                 android:textColor="#FFFfff"
                 android:textStyle="bold"
-                android:typeface="monospace"
                 app:isCheckedSwitchOff="@{item.status}" />
 
             <RadioButton
@@ -82,10 +80,9 @@
                 android:gravity="center"
                 android:onClick="@{(view)->listener.onButtonOnClicked(item,position)}"
                 android:padding="@dimen/dp_4"
-                android:text="On"
+                android:text="@string/text_on"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
-                android:typeface="monospace"
                 app:isCheckedSwitchOn="@{item.status}" />
         </RadioGroup>
 

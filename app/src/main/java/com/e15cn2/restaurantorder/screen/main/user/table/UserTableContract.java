@@ -1,10 +1,10 @@
-package com.e15cn2.restaurantorder.screen.main.admin.table;
+package com.e15cn2.restaurantorder.screen.main.user.table;
 
 import com.e15cn2.restaurantorder.data.model.Table;
 
 import java.util.List;
 
-public interface AdminTableContract {
+public interface UserTableContract {
     interface Presenter {
         void getTables();
     }

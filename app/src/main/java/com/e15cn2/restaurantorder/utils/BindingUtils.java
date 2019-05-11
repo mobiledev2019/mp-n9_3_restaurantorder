@@ -1,6 +1,7 @@
 package com.e15cn2.restaurantorder.utils;
 
 import android.databinding.BindingAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -9,10 +10,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.data.model.TableBooking;
+import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
+import java.util.List;
 import java.util.Locale;
 
 import static com.e15cn2.restaurantorder.utils.Constants.JsonCommonKey.IS_OFF;
@@ -82,4 +86,12 @@ public class BindingUtils {
         }
     }
 
+    @BindingAdapter({"recyclerTableBooking"})
+    public static void setRecyclerViewTableBooking(RecyclerView recyclerView, List<TableBooking> tableBookings) {
+        BaseAdapter<TableBooking> adapter = new BaseAdapter<>(
+                recyclerView.getContext(),
+                R.layout.item_table_booking);
+        adapter.setDatas(tableBookings);
+        recyclerView.setAdapter(adapter);
+    }
 }

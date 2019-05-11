@@ -15,21 +15,29 @@ public class TableBooking implements Serializable, Parcelable {
     private int mTableNumber;
     @SerializedName(Constants.JSonTableBookingKey.TIME_BOOKING)
     private String mTimeBooking;
+    @SerializedName(Constants.JSonTableBookingKey.USER_NAME)
+    private String mUsername;
     @SerializedName(Constants.JSonTableBookingKey.USER_EMAIL)
     private String mUserEmail;
+    @SerializedName(Constants.JSonTableBookingKey.USER_PHONE)
+    private String mUserPhone;
 
-    public TableBooking(long id, int tableNumber, String timeBooking, String userEmail) {
+    public TableBooking(long id, int tableNumber, String timeBooking, String username, String userEmail, String userPhone) {
         mId = id;
         mTableNumber = tableNumber;
         mTimeBooking = timeBooking;
+        mUsername = username;
         mUserEmail = userEmail;
+        mUserPhone = userPhone;
     }
 
     protected TableBooking(Parcel in) {
         mId = in.readLong();
         mTableNumber = in.readInt();
         mTimeBooking = in.readString();
+        mUsername = in.readString();
         mUserEmail = in.readString();
+        mUserPhone = in.readString();
     }
 
     public static final Creator<TableBooking> CREATOR = new Creator<TableBooking>() {
@@ -56,8 +64,16 @@ public class TableBooking implements Serializable, Parcelable {
         return mTimeBooking;
     }
 
+    public String getUsername() {
+        return mUsername;
+    }
+
     public String getUserEmail() {
         return mUserEmail;
+    }
+
+    public String getUserPhone() {
+        return mUserPhone;
     }
 
     @Override
@@ -70,6 +86,20 @@ public class TableBooking implements Serializable, Parcelable {
         dest.writeLong(mId);
         dest.writeInt(mTableNumber);
         dest.writeString(mTimeBooking);
+        dest.writeString(mUsername);
         dest.writeString(mUserEmail);
+        dest.writeString(mUserPhone);
+    }
+
+    @Override
+    public String toString() {
+        return "TableBooking{" +
+                "mId=" + mId +
+                ", mTableNumber=" + mTableNumber +
+                ", mTimeBooking='" + mTimeBooking + '\'' +
+                ", mUsername='" + mUsername + '\'' +
+                ", mUserEmail='" + mUserEmail + '\'' +
+                ", mUserPhone='" + mUserPhone + '\'' +
+                '}';
     }
 }

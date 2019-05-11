@@ -71,7 +71,7 @@ public class AdminItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     public void showMessage(String msg) {
-        //Delete action
+        //update status action
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
             mPresenter.getItems();
         } else {

@@ -16,9 +16,9 @@ import com.e15cn2.restaurantorder.utils.StringUtils;
 
 import java.util.Calendar;
 
-public class SignUpFragment extends BaseFragment<FragmentSignUpBinding> implements SignUpContract.View {
+public class SignUpFragment extends BaseFragment<FragmentSignUpBinding>
+        implements SignUpContract.View, DatePickerDialog.OnDateSetListener {
     private SignUpContract.Presenter mPresenter;
-    private DatePickerDialog.OnDateSetListener mDate;
     private Calendar mCalendar;
 
     public static SignUpFragment newInstance() {
@@ -35,8 +35,6 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding> implemen
         ActivityUtils.hideSoftKeyboard(getActivity(), binding.getRoot());
         mPresenter = new SignUpPresenter(
                 UserRepository.getInstance(UserRemoteDataSource.getInstance()), this);
-        mCalendar = Calendar.getInstance();
-        pickDateOfBirth();
         binding.setListener(this);
     }
 
@@ -57,8 +55,17 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding> implemen
         //Belong to dev
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        updateDobField();
+    }
+
     public void showDatePicker() {
-        new DatePickerDialog(getActivity(), mDate,
+        mCalendar = Calendar.getInstance();
+        new DatePickerDialog(getActivity(), this,
                 mCalendar.get(Calendar.YEAR),
                 mCalendar.get(Calendar.MONTH),
                 mCalendar.get(Calendar.DAY_OF_MONTH))
@@ -104,18 +111,6 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding> implemen
                 SignInFragment.newInstance(
                         binding.textEmail.getText().toString(),
                         binding.textPassword.getText().toString()));
-    }
-
-    private void pickDateOfBirth() {
-        mDate = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                mCalendar.set(Calendar.YEAR, year);
-                mCalendar.set(Calendar.MONTH, month);
-                mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateDobField();
-            }
-        };
     }
 
     private void updateDobField() {

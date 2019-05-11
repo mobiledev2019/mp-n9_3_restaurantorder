@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Menu;
 import com.e15cn2.restaurantorder.data.model.User;
-import com.e15cn2.restaurantorder.databinding.ActivityMainBinding;
+import com.e15cn2.restaurantorder.databinding.ActivityAdminMainBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseActivity;
 import com.e15cn2.restaurantorder.screen.landing.LandingActivity;
 import com.e15cn2.restaurantorder.screen.main.admin.add_item.AddItemFragment;
@@ -29,7 +29,7 @@ import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
+public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
         implements NavigationView.OnNavigationItemSelectedListener,
         MenuFragment.OnMenuClickListener {
     public static final String EXTRA_USER =
@@ -45,7 +45,7 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_main;
+        return R.layout.activity_admin_main;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class AdminMainActivity extends BaseActivity<ActivityMainBinding>
                 actionNavigation(MenuFragment.newInstance(mUser));
                 break;
             case R.id.action_table:
-                actionNavigation(AdminTableFragment.newInstance());
+                actionNavigation(AdminTableFragment.newInstance(mUser));
                 break;
             case R.id.action_sign_out:
                 signOut();

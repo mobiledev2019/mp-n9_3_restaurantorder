@@ -69,7 +69,7 @@ public class AddItemFragment extends BaseFragment<FragmentAddItemBinding>
         mIsMenuSelected = false;
         mPresenter = new AddItemPresenter(
                 ItemRepository.getInstance(ItemRemoteDataSource.getInstance()), this);
-        mAdapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item, mMenuNames);
+        mAdapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, mMenuNames);
         binding.spinnerMenu.setAdapter(mAdapter);
         binding.spinnerMenu.setOnItemSelectedListener(this);
         binding.setListener(this);
