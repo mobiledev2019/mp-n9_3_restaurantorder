@@ -51,4 +51,19 @@ public class SignInPresenter implements SignInContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void signUpSocialAccount(String id, String name, String dob, String email, String phone, String password) {
+        mRepository.signUp(id, name, dob, email, phone, password).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                //Do nothing
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                //Do nothing
+            }
+        });
+    }
 }

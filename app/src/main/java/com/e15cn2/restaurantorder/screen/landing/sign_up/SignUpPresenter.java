@@ -23,12 +23,13 @@ public class SignUpPresenter implements SignUpContract.Presenter {
     }
 
     @Override
-    public void signUp(String name,
+    public void signUp(String id,
+                       String name,
                        String dob,
                        String email,
                        String phone,
                        String password) {
-        mRepository.signUp(name, dob, email, phone, password).enqueue(new Callback<ResponseBody>() {
+        mRepository.signUp(id, name, dob, email, phone, password).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {

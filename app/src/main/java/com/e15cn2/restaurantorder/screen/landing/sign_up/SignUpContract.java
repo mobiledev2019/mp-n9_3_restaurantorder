@@ -2,7 +2,8 @@ package com.e15cn2.restaurantorder.screen.landing.sign_up;
 
 public interface SignUpContract {
     interface Presenter {
-        void signUp(String name,
+        void signUp(String id,
+                    String name,
                     String dob,
                     String email,
                     String phone,

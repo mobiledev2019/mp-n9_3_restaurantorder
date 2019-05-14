@@ -6,6 +6,13 @@ public interface SignInContract {
     interface Presenter {
         void signIn(String email,
                     String password);
+
+        void signUpSocialAccount(String id,
+                                 String name,
+                                 String dob,
+                                 String email,
+                                 String phone,
+                                 String password);
     }
 
     interface View {

@@ -20,8 +20,8 @@ public class UserRemoteDataSource implements UserDataSource.Remote {
     }
 
     @Override
-    public Call<ResponseBody> signUp(String name, String dob, String email, String phone, String password) {
-        return signUpUser(name, dob, email, phone, password);
+    public Call<ResponseBody> signUp(String id, String name, String dob, String email, String phone, String password) {
+        return signUpUser(id, name, dob, email, phone, password);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class UserRemoteDataSource implements UserDataSource.Remote {
     }
 
 
-    private Call<ResponseBody> signUpUser(String name, String dob, String email, String phone, String password) {
-        Call<ResponseBody> call = AppConfig.getApiConfig().signUp(name, dob, email, phone, password);
+    private Call<ResponseBody> signUpUser(String id, String name, String dob, String email, String phone, String password) {
+        Call<ResponseBody> call = AppConfig.getApiConfig().signUp(id, name, dob, email, phone, password);
         return call;
     }
 

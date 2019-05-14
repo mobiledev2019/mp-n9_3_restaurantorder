@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class User implements Parcelable {
-    private long mId;
+    private String mId;
     private String mName;
     private String mDob;
     private String mEmail;
@@ -30,7 +30,7 @@ public class User implements Parcelable {
     }
 
     public User(JSONObject jsonObject) throws JSONException {
-        mId = jsonObject.getLong(Constants.JsonUserKey.ID);
+        mId = jsonObject.getString(Constants.JsonUserKey.ID);
         mName = jsonObject.getString(Constants.JsonUserKey.NAME);
         mDob = jsonObject.getString(Constants.JsonUserKey.DOB);
         mEmail = jsonObject.getString(Constants.JsonUserKey.EMAIL);
@@ -41,7 +41,7 @@ public class User implements Parcelable {
     }
 
     protected User(Parcel in) {
-        mId = in.readLong();
+        mId = in.readString();
         mName = in.readString();
         mDob = in.readString();
         mEmail = in.readString();
@@ -63,7 +63,7 @@ public class User implements Parcelable {
         }
     };
 
-    public long getId() {
+    public String getId() {
         return mId;
     }
 
@@ -106,7 +106,7 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(mId);
+        dest.writeString(mId);
         dest.writeString(mName);
         dest.writeString(mDob);
         dest.writeString(mEmail);
@@ -117,7 +117,7 @@ public class User implements Parcelable {
     }
 
     public static class Builder {
-        private long mId;
+        private String mId;
         private String mName;
         private String mDob;
         private String mEmail;
@@ -129,7 +129,7 @@ public class User implements Parcelable {
         public Builder() {
         }
 
-        public Builder setId(long id) {
+        public Builder setId(String id) {
             mId = id;
             return this;
         }

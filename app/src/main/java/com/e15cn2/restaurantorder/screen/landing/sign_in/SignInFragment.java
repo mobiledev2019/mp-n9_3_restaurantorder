@@ -43,11 +43,13 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
         implements SignInContract.View, FacebookCallback<LoginResult> {
     private static final String ARGUMENT_EMAIL = "ARGUMENT_EMAIL";
     private static final String ARGUMENT_PASSWORD = "ARGUMENT_PASSWORD";
+    private static final String FB_ID = "id";
     private static final String FB_FIELDS = "fields";
     private static final String FB_NAME = "name";
     private static final String FB_EMAIL = "email";
     private static final String FB_PUBLIC_PROFILE = "public_profile";
-    private static final String FB_VALUE = FB_NAME + "," + FB_EMAIL;
+    private static final String FB_DOB = "birthday";
+    private static final String FB_VALUE = FB_ID + "," + FB_NAME + "," + FB_EMAIL + "," + FB_DOB;
     private static final int RC_SIGN_IN = 123;
     private SignInContract.Presenter mPresenter;
     private User mUser;
@@ -198,10 +200,18 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             if (account != null) {
                 User user = new User.Builder()
+                        .setId(account.getId())
                         .setName(account.getDisplayName())
                         .setEmail(account.getEmail())
                         .setImage(account.getPhotoUrl().toString())
                         .build();
+                mPresenter.signUpSocialAccount(
+                        user.getId(),
+                        user.getName(),
+                        user.getDob(),
+                        user.getEmail(),
+                        user.getPhone(),
+                        user.getPassword());
                 onSignInSuccess(user);
             }
 
@@ -220,9 +230,18 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
                             GraphResponse response) {
                         try {
                             User user = new User.Builder()
+                                    .setId(String.valueOf(response.getJSONObject().getString(FB_ID)))
                                     .setName(response.getJSONObject().getString(FB_NAME))
                                     .setEmail(response.getJSONObject().getString(FB_EMAIL))
+                                    .setDob(response.getJSONObject().getString(FB_DOB))
                                     .build();
+                            mPresenter.signUpSocialAccount(
+                                    user.getId(),
+                                    user.getName(),
+                                    user.getDob(),
+                                    user.getEmail(),
+                                    user.getPhone(),
+                                    user.getPassword());
                             onSignInSuccess(user);
                             onSignInSuccess(user);
                         } catch (JSONException e) {

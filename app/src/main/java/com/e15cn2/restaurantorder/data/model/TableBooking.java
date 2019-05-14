@@ -22,15 +22,6 @@ public class TableBooking implements Serializable, Parcelable {
     @SerializedName(Constants.JSonTableBookingKey.USER_PHONE)
     private String mUserPhone;
 
-    public TableBooking(long id, int tableNumber, String timeBooking, String username, String userEmail, String userPhone) {
-        mId = id;
-        mTableNumber = tableNumber;
-        mTimeBooking = timeBooking;
-        mUsername = username;
-        mUserEmail = userEmail;
-        mUserPhone = userPhone;
-    }
-
     protected TableBooking(Parcel in) {
         mId = in.readLong();
         mTableNumber = in.readInt();
@@ -89,17 +80,5 @@ public class TableBooking implements Serializable, Parcelable {
         dest.writeString(mUsername);
         dest.writeString(mUserEmail);
         dest.writeString(mUserPhone);
-    }
-
-    @Override
-    public String toString() {
-        return "TableBooking{" +
-                "mId=" + mId +
-                ", mTableNumber=" + mTableNumber +
-                ", mTimeBooking='" + mTimeBooking + '\'' +
-                ", mUsername='" + mUsername + '\'' +
-                ", mUserEmail='" + mUserEmail + '\'' +
-                ", mUserPhone='" + mUserPhone + '\'' +
-                '}';
     }
 }

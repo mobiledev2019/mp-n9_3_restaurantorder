@@ -88,6 +88,7 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding>
             return;
         } else {
             mPresenter.signUp(
+                    String.valueOf(System.currentTimeMillis()),
                     binding.textFullName.getText().toString().trim(),
                     binding.textDob.getText().toString().trim(),
                     binding.textEmail.getText().toString().trim(),
