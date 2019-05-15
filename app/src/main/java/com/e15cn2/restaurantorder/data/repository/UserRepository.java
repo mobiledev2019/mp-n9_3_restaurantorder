@@ -26,7 +26,7 @@ public class UserRepository implements UserDataSource.Remote {
     }
 
     @Override
-    public Call<ResponseBody> signIn(String email, String password) {
-        return mRemote.signIn(email, password);
+    public Call<ResponseBody> signIn(String email, String password,String token) {
+        return mRemote.signIn(email, password, token);
     }
 }

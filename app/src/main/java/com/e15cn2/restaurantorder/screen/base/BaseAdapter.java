@@ -14,7 +14,7 @@ import com.android.databinding.library.baseAdapters.BR;
 import java.util.List;
 
 public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder> {
-    private List<T> mDatas;
+    private List<T> mData;
     private @LayoutRes
     int mLayoutRes;
     private LayoutInflater mInflater;
@@ -25,8 +25,8 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setDatas(List<T> datas) {
-        mDatas = datas;
+    public void setData(List<T> data) {
+        mData = data;
         notifyDataSetChanged();
     }
 
@@ -42,12 +42,12 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mDatas == null ? 0 : mDatas.size();
+        return mData == null ? 0 : mData.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull BaseAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.mView.setVariable(BR.item, mDatas.get(i));
+        viewHolder.mView.setVariable(BR.item, mData.get(i));
         viewHolder.mView.setVariable(BR.listener, mListener);
         viewHolder.mView.setVariable(BR.position, i);
         viewHolder.mView.executePendingBindings();
@@ -64,7 +64,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
 
         public void removeItem() {
             try {
-                mDatas.remove(getAdapterPosition());
+                mData.remove(getAdapterPosition());
                 notifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();

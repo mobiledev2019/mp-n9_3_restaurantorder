@@ -183,6 +183,6 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
 
     @Override
     public void onMakeAnOrder(Table table) {
-        actionNavigation(MenuFragment.newInstance(mUser));
+        actionNavigation(MenuFragment.newInstance(mUser,table));
     }
 }

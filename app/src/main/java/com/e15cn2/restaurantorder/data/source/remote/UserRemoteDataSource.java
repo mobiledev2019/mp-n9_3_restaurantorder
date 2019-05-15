@@ -25,8 +25,8 @@ public class UserRemoteDataSource implements UserDataSource.Remote {
     }
 
     @Override
-    public Call<ResponseBody> signIn(String email, String password) {
-        return signInUser(email, password);
+    public Call<ResponseBody> signIn(String email, String password, String token) {
+        return signInUser(email, password, token);
     }
 
 
@@ -35,8 +35,8 @@ public class UserRemoteDataSource implements UserDataSource.Remote {
         return call;
     }
 
-    private Call<ResponseBody> signInUser(String email, String password) {
-        Call<ResponseBody> call = AppConfig.getApiConfig().signIn(email,password);
+    private Call<ResponseBody> signInUser(String email, String password, String token) {
+        Call<ResponseBody> call = AppConfig.getApiConfig().signIn(email, password, token);
         return call;
     }
 }

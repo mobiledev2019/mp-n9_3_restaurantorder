@@ -19,8 +19,8 @@ public class TableBooking implements Serializable, Parcelable {
     private String mUsername;
     @SerializedName(Constants.JSonTableBookingKey.USER_EMAIL)
     private String mUserEmail;
-    @SerializedName(Constants.JSonTableBookingKey.USER_PHONE)
-    private String mUserPhone;
+    @SerializedName(Constants.JSonTableBookingKey.PHONE_BOOKING)
+    private String mPhoneBooking;
 
     protected TableBooking(Parcel in) {
         mId = in.readLong();
@@ -28,20 +28,8 @@ public class TableBooking implements Serializable, Parcelable {
         mTimeBooking = in.readString();
         mUsername = in.readString();
         mUserEmail = in.readString();
-        mUserPhone = in.readString();
+        mPhoneBooking = in.readString();
     }
-
-    public static final Creator<TableBooking> CREATOR = new Creator<TableBooking>() {
-        @Override
-        public TableBooking createFromParcel(Parcel in) {
-            return new TableBooking(in);
-        }
-
-        @Override
-        public TableBooking[] newArray(int size) {
-            return new TableBooking[size];
-        }
-    };
 
     public long getId() {
         return mId;
@@ -63,9 +51,21 @@ public class TableBooking implements Serializable, Parcelable {
         return mUserEmail;
     }
 
-    public String getUserPhone() {
-        return mUserPhone;
+    public String getPhoneBooking() {
+        return mPhoneBooking;
     }
+
+    public static final Creator<TableBooking> CREATOR = new Creator<TableBooking>() {
+        @Override
+        public TableBooking createFromParcel(Parcel in) {
+            return new TableBooking(in);
+        }
+
+        @Override
+        public TableBooking[] newArray(int size) {
+            return new TableBooking[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -79,6 +79,6 @@ public class TableBooking implements Serializable, Parcelable {
         dest.writeString(mTimeBooking);
         dest.writeString(mUsername);
         dest.writeString(mUserEmail);
-        dest.writeString(mUserPhone);
+        dest.writeString(mPhoneBooking);
     }
 }

@@ -10,6 +10,7 @@ public class SharedPreferenceUtils {
     private static final String PREF_NAME = "PREF_NAME";
     private static final String PREF_SIGN_IN = "PREF_SIGN_IN";
     private static final String PREF_USER = "PREF_USER";
+    private static final String PREF_DEVICE_TOKEN = "PREF_DEVICE_TOKEN";
     private static SharedPreferenceUtils sInstance;
     private static SharedPreferences sSharedPreferences;
     private Gson mGson;
@@ -39,12 +40,22 @@ public class SharedPreferenceUtils {
         editor.apply();
     }
 
+    public void saveDeviceToken(String token) {
+        SharedPreferences.Editor editor = sSharedPreferences.edit();
+        editor.putString(PREF_DEVICE_TOKEN, token);
+        editor.apply();
+    }
+
+    public String getDeviceToken() {
+        return sSharedPreferences.getString(PREF_DEVICE_TOKEN, null);
+    }
+
     public boolean getSignInState() {
         return sSharedPreferences.getBoolean(PREF_SIGN_IN, false);
     }
 
     public User getUser() {
-        String jsonUser = sSharedPreferences.getString(PREF_USER, "");
+        String jsonUser = sSharedPreferences.getString(PREF_USER, null);
         return mGson.fromJson(jsonUser, User.class);
     }
 }

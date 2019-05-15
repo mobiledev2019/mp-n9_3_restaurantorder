@@ -4,9 +4,11 @@ public interface ReserveTableContract {
     interface Presenter {
         void reserveTable(String number,
                           String timeBooking,
-                          String userName,
-                          String userEmail,
-                          String userPhone);
+                          String userId,
+                          String phoneBooking);
+
+        void pushSmallNotification(String title,
+                                   String msg);
     }
 
     interface View {

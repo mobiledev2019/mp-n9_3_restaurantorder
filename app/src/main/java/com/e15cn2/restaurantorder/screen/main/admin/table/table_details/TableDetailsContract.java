@@ -1,4 +1,4 @@
-package com.e15cn2.restaurantorder.screen.main.admin.table.tables_list;
+package com.e15cn2.restaurantorder.screen.main.admin.table.table_details;
 
 public interface TableDetailsContract {
     interface Presenter {

@@ -5,7 +5,8 @@ import com.e15cn2.restaurantorder.data.model.User;
 public interface SignInContract {
     interface Presenter {
         void signIn(String email,
-                    String password);
+                    String password,
+                    String token);
 
         void signUpSocialAccount(String id,
                                  String name,

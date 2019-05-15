@@ -15,9 +15,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.application.AppContext;
 import com.e15cn2.restaurantorder.data.model.Table;
 import com.e15cn2.restaurantorder.data.model.User;
+import com.e15cn2.restaurantorder.data.repository.FCMRepository;
 import com.e15cn2.restaurantorder.data.repository.TableRepository;
+import com.e15cn2.restaurantorder.data.source.remote.FCMRemoteDataSource;
 import com.e15cn2.restaurantorder.data.source.remote.TableRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentDialogReserveTableBinding;
 import com.e15cn2.restaurantorder.utils.Constants;
@@ -39,6 +42,8 @@ public class ReserveTableDialogFragment extends DialogFragment
     private User mUser;
     private Table mTable;
     private ReserveTableContract.Presenter mPresenter;
+    private String mTitleNotification;
+    private String mMessageNotification;
 
     public static ReserveTableDialogFragment newInstance(Table table, User user) {
         ReserveTableDialogFragment fragment = new ReserveTableDialogFragment();
@@ -62,7 +67,9 @@ public class ReserveTableDialogFragment extends DialogFragment
 
     private void initData() {
         mPresenter = new ReserveTablePresenter(
-                TableRepository.getInstance(TableRemoteDataSource.getInstance()), this);
+                TableRepository.getInstance(TableRemoteDataSource.getInstance()),
+                FCMRepository.getInstance(FCMRemoteDataSource.getInstance()),
+                this);
         this.setCancelable(false);
         mCalendar = Calendar.getInstance();
         if (getArguments() != null) {
@@ -76,7 +83,7 @@ public class ReserveTableDialogFragment extends DialogFragment
     @Override
     public void onStart() {
         super.onStart();
-        mBinding.textTable.setText(getActivity().getString(R.string.text_number) + mTable.getNumber());
+        mBinding.textTable.setText(AppContext.getInstance().getString(R.string.text_number) + mTable.getNumber());
     }
 
     @Override
@@ -97,12 +104,12 @@ public class ReserveTableDialogFragment extends DialogFragment
     @Override
     public void showMessage(String msg) {
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
-            DialogInform dialog = new DialogInform();
-            dialog.showDialog(getActivity(), getActivity().getString(R.string.text_inform_reserve_success));
+            DialogInform.showDialog(getParentFragment().getActivity(), AppContext.getInstance().getString(R.string.text_inform_reserve_success));
+            mPresenter.pushSmallNotification(mTitleNotification, mMessageNotification);
         } else if (msg.equals(Constants.JSonKey.MESSAGE_EXISTED)) {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_existed_reservation), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_existed_reservation), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_reserve_table_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_reserve_table_failed), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -118,7 +125,7 @@ public class ReserveTableDialogFragment extends DialogFragment
         } else {
             Toast.makeText(
                     getActivity(),
-                    getActivity().getString(R.string.text_notify_pick_date_first),
+                    AppContext.getInstance().getString(R.string.text_notify_pick_date_first),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -130,7 +137,7 @@ public class ReserveTableDialogFragment extends DialogFragment
         } else {
             Toast.makeText(
                     getActivity(),
-                    getActivity().getString(R.string.text_notify_pick_date_first),
+                    AppContext.getInstance().getString(R.string.text_notify_pick_date_first),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -143,18 +150,19 @@ public class ReserveTableDialogFragment extends DialogFragment
         if (StringUtils.isEmpty(mBinding.textPhone)) {
             return;
         } else if (mBinding.textDate.getText().equals("") || mBinding.textFrom.getText().equals("") || mBinding.textTo.getText().equals("")) {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_notifty_select_time_reserve), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_notifty_select_time_reserve), Toast.LENGTH_SHORT).show();
         } else {
             String timeBooking =
-                    mBinding.textDate.getText().toString().trim() + getActivity().getString(R.string.text_from_not_cap) +
-                            mBinding.textFrom.getText().toString().trim() + getActivity().getString(R.string.text_to) +
+                    mBinding.textDate.getText().toString().trim() + AppContext.getInstance().getString(R.string.text_from_not_cap) +
+                            mBinding.textFrom.getText().toString().trim() + AppContext.getInstance().getString(R.string.text_to) +
                             mBinding.textTo.getText().toString().trim();
             mPresenter.reserveTable(
                     mTable.getNumber(),
                     timeBooking,
-                    mUser.getName(),
-                    mUser.getEmail(),
+                    mUser.getId(),
                     mBinding.textPhone.getText().toString().trim());
+            mTitleNotification = AppContext.getInstance().getString(R.string.text_number) + mTable.getNumber();
+            mMessageNotification = timeBooking;
             this.dismiss();
         }
     }
@@ -185,7 +193,7 @@ public class ReserveTableDialogFragment extends DialogFragment
         } else {
             Toast.makeText(
                     getActivity(),
-                    getActivity().getText(R.string.text_date_not_valid),
+                    AppContext.getInstance().getText(R.string.text_date_not_valid),
                     Toast.LENGTH_SHORT).show();
         }
     }

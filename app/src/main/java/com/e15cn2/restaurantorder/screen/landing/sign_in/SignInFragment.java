@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.application.AppContext;
 import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.data.repository.UserRepository;
 import com.e15cn2.restaurantorder.data.source.remote.UserRemoteDataSource;
@@ -131,7 +132,7 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
             onSignInSuccess(mUser);
         } else {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_sign_in_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_sign_in_failed), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -169,7 +170,8 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
         } else {
             mPresenter.signIn(
                     binding.textEmail.getText().toString().trim(),
-                    binding.textPassword.getText().toString().trim());
+                    binding.textPassword.getText().toString().trim(),
+                    SharedPreferenceUtils.getInstance(getActivity()).getDeviceToken());
         }
     }
 
@@ -199,12 +201,22 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             if (account != null) {
-                User user = new User.Builder()
-                        .setId(account.getId())
-                        .setName(account.getDisplayName())
-                        .setEmail(account.getEmail())
-                        .setImage(account.getPhotoUrl().toString())
-                        .build();
+                User user = null;
+                if (account.getPhotoUrl() != null) {
+                    user = new User.Builder()
+                            .setId(account.getId())
+                            .setName(account.getDisplayName())
+                            .setEmail(account.getEmail())
+                            .setImage(account.getPhotoUrl().toString())
+                            .build();
+                } else {
+                    user = new User.Builder()
+                            .setId(account.getId())
+                            .setName(account.getDisplayName())
+                            .setEmail(account.getEmail())
+                            .build();
+                }
+
                 mPresenter.signUpSocialAccount(
                         user.getId(),
                         user.getName(),

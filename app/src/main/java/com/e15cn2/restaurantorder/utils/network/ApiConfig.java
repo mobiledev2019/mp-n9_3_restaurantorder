@@ -27,7 +27,8 @@ public interface ApiConfig {
     @FormUrlEncoded
     @POST(Constants.Network.SIGN_IN)
     Call<ResponseBody> signIn(@Field(Constants.JsonUserKey.EMAIL) String identity,
-                              @Field(Constants.JsonUserKey.PASSWORD) String password);
+                              @Field(Constants.JsonUserKey.PASSWORD) String password,
+                              @Field(Constants.JsonUserKey.TOKEN) String token);
 
     @FormUrlEncoded
     @POST(Constants.Network.ADD_MENU)
@@ -67,12 +68,22 @@ public interface ApiConfig {
     @POST(Constants.Network.RESERVE_TABLE)
     Call<ResponseBody> reserveTable(@Field(Constants.JSonTableBookingKey.TABLE_NUMBER) String number,
                                     @Field(Constants.JSonTableBookingKey.TIME_BOOKING) String timeBooking,
-                                    @Field(Constants.JSonTableBookingKey.USER_NAME) String userName,
-                                    @Field(Constants.JSonTableBookingKey.USER_EMAIL) String userEmail,
-                                    @Field(Constants.JSonTableBookingKey.USER_PHONE) String userPhone);
+                                    @Field(Constants.JSonTableBookingKey.USER_ID) String userId,
+                                    @Field(Constants.JSonTableBookingKey.PHONE_BOOKING) String phoneBooking);
 
     @FormUrlEncoded
     @POST(Constants.Network.UPDATE_TABLE_STATUS)
     Call<ResponseBody> updateTableStatus(@Field(Constants.JsonTableKey.NUMBER) String number,
                                          @Field(Constants.JsonTableKey.STATUS) int status);
+
+    @FormUrlEncoded
+    @POST(Constants.Network.PUSH_NOTIFICATION_TO_ADMIN)
+    Call<ResponseBody> userPushBigNotification(@Field("title") String title,
+                                               @Field("message") String message,
+                                               @Field("image") String image);
+
+    @FormUrlEncoded
+    @POST(Constants.Network.PUSH_NOTIFICATION_TO_ADMIN)
+    Call<ResponseBody> userPushSmallNotification(@Field("title") String title,
+                                                 @Field("message") String message);
 }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.e15cn2.restaurantorder.R;
 
 public class DialogInform {
-    public void showDialog(Context context, String msg) {
+    public static void showDialog(Context context, String msg) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);

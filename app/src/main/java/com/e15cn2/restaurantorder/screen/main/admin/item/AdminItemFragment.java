@@ -61,7 +61,7 @@ public class AdminItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
                 }
             }
         }
-        mAdapter.setDatas(itemsShow);
+        mAdapter.setData(itemsShow);
     }
 
     @Override

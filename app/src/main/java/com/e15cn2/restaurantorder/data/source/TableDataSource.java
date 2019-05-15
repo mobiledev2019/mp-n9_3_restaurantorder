@@ -19,9 +19,9 @@ public interface TableDataSource {
 
         Call<ResponseBody> reserveTable(String number,
                                         String timeBooking,
-                                        String userName,
-                                        String userEmail,
-                                        String userPhone);
+                                        String userId,
+                                        String phoneBooking);
+
         Call<ResponseBody> updateTableStatus(String number, int status);
     }
 }

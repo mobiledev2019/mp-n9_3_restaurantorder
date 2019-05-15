@@ -1,10 +1,11 @@
-package com.e15cn2.restaurantorder.screen.main.admin.table.tables_list;
+package com.e15cn2.restaurantorder.screen.main.admin.table.table_details;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.e15cn2.restaurantorder.data.model.Table;
 import com.e15cn2.restaurantorder.data.repository.TableRepository;
 import com.e15cn2.restaurantorder.data.source.remote.TableRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentDialogTableDetailBinding;
+import com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.TablesListFragment;
 import com.e15cn2.restaurantorder.utils.Constants;
 
 import static android.app.Activity.RESULT_OK;
@@ -67,11 +69,11 @@ public class TableDetailsDialogFragment extends DialogFragment
         mPresenter = new TableDetailsPresenter(
                 TableRepository.getInstance(TableRemoteDataSource.getInstance()), this);
         mBinding.setListener(this);
+        mBinding.recyclerBooking.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         if (getArguments() != null) {
             mTable = getArguments().getParcelable(ARGUMENT_TABLE);
             mPosition = getArguments().getInt(ARGUMENT_POSITION);
             mBinding.setItem(mTable);
-            mBinding.recyclerBooking.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         }
     }
 

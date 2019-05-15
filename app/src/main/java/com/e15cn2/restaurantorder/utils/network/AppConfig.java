@@ -9,7 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppConfig {
     private static Retrofit sRetrofit = null;
-    public static Retrofit getRetrofit() {
+
+    private static Retrofit getRetrofit() {
         Gson gson = new GsonBuilder().setLenient().create();
         if (sRetrofit == null)
             return new Retrofit.Builder()
@@ -18,7 +19,8 @@ public class AppConfig {
                     .build();
         else return sRetrofit;
     }
-    public static ApiConfig getApiConfig(){
+
+    public static ApiConfig getApiConfig() {
         return getRetrofit().create(ApiConfig.class);
     }
 }

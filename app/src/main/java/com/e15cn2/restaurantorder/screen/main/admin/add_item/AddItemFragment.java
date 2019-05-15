@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.application.AppContext;
 import com.e15cn2.restaurantorder.data.model.Menu;
 import com.e15cn2.restaurantorder.data.repository.ItemRepository;
 import com.e15cn2.restaurantorder.data.source.remote.ItemRemoteDataSource;
@@ -107,10 +108,10 @@ public class AddItemFragment extends BaseFragment<FragmentAddItemBinding>
     @Override
     public void showMessage(String msg) {
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_add_item_success), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_add_item_success), Toast.LENGTH_SHORT).show();
             getFragmentManager().popBackStack();
         } else {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_add_item_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_add_item_failed), Toast.LENGTH_SHORT).show();
         }
     }
 

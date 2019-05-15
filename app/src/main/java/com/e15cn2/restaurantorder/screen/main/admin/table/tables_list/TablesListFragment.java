@@ -14,6 +14,7 @@ import com.e15cn2.restaurantorder.databinding.FragmentRecyclerViewBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.table.OnTableClickListener;
+import com.e15cn2.restaurantorder.screen.main.admin.table.table_details.TableDetailsDialogFragment;
 import com.e15cn2.restaurantorder.screen.main.user.home.UserHomeFragment;
 import com.e15cn2.restaurantorder.screen.main.user.reserve_table.ReserveTableDialogFragment;
 
@@ -92,7 +93,7 @@ public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding
             mTables = getArguments().getParcelableArrayList(ARGUMENT_TABLES);
             mUser = getArguments().getParcelable(ARGUMENT_USER);
             mAction = getArguments().getString(ARGUMENT_ACTION);
-            mAdapter.setDatas(mTables);
+            mAdapter.setData(mTables);
             mAdapter.setListener(this);
         }
     }
@@ -120,7 +121,7 @@ public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding
             int position = data.getIntExtra(EXTRA_POSITION, 0);
             int status = data.getIntExtra(EXTRA_STATUS, 0);
             mTables.get(position).setStatus(status);
-            mAdapter.setDatas(mTables);
+            mAdapter.setData(mTables);
         }
     }
 

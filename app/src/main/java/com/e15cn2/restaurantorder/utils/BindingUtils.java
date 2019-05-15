@@ -1,7 +1,9 @@
 package com.e15cn2.restaurantorder.utils;
 
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -15,6 +17,7 @@ import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -87,11 +90,33 @@ public class BindingUtils {
     }
 
     @BindingAdapter({"recyclerTableBooking"})
-    public static void setRecyclerViewTableBooking(RecyclerView recyclerView, List<TableBooking> tableBookings) {
-        BaseAdapter<TableBooking> adapter = new BaseAdapter<>(
+    public static void setRecyclerViewTableBooking(RecyclerView recyclerView, final List<TableBooking> tableBookings) {
+        final BaseAdapter<TableBooking> adapter = new BaseAdapter<>(
                 recyclerView.getContext(),
                 R.layout.item_table_booking);
-        adapter.setDatas(tableBookings);
+        adapter.setData(tableBookings);
         recyclerView.setAdapter(adapter);
+
+        ItemTouchHelper mHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                int from = viewHolder.getAdapterPosition();
+                int to = target.getAdapterPosition();
+                Collections.swap(tableBookings, from, to);
+                adapter.notifyItemMoved(from, to);
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                tableBookings.remove(viewHolder.getAdapterPosition());
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            }
+        });
+        mHelper.attachToRecyclerView(recyclerView);
     }
 }

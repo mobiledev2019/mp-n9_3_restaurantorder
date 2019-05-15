@@ -18,6 +18,7 @@ public interface UserDataSource {
                                   String password);
 
         Call<ResponseBody> signIn(String email,
-                                  String password);
+                                  String password,
+                                  String token);
     }
 }

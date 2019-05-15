@@ -1,5 +1,6 @@
 package com.e15cn2.restaurantorder.screen.main.user.reserve_table;
 
+import com.e15cn2.restaurantorder.data.repository.FCMRepository;
 import com.e15cn2.restaurantorder.data.repository.TableRepository;
 import com.e15cn2.restaurantorder.utils.Constants;
 
@@ -14,17 +15,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReserveTablePresenter implements ReserveTableContract.Presenter {
-    private TableRepository mRepository;
+    private TableRepository mTableRepository;
+    private FCMRepository mFCMRepository;
     private ReserveTableContract.View mView;
 
-    public ReserveTablePresenter(TableRepository repository, ReserveTableContract.View view) {
-        mRepository = repository;
+    public ReserveTablePresenter(TableRepository tableRepository,
+                                 FCMRepository fcmRepository,
+                                 ReserveTableContract.View view) {
+        mTableRepository = tableRepository;
+        mFCMRepository = fcmRepository;
         mView = view;
     }
 
     @Override
-    public void reserveTable(String number, String timeBooking, String userName, String userEmail, String userPhone) {
-        mRepository.reserveTable(number, timeBooking, userName, userEmail, userPhone)
+    public void reserveTable(String number, String timeBooking, String userId, String phoneBooking) {
+        mTableRepository.reserveTable(number, timeBooking, userId, phoneBooking)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -47,5 +52,30 @@ public class ReserveTablePresenter implements ReserveTableContract.Presenter {
                         mView.showMessage(t.getMessage());
                     }
                 });
+    }
+
+    @Override
+    public void pushSmallNotification(String title, String msg) {
+        mFCMRepository.userPushSmallNotification(title, msg).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        String message = jsonObject.getString(Constants.JSonKey.MESSAGE);
+                        mView.showMessage(message);
+                    } catch (JSONException e) {
+                        mView.showError(e);
+                    } catch (IOException e) {
+                        mView.showError(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mView.showMessage(t.getMessage());
+            }
+        });
     }
 }

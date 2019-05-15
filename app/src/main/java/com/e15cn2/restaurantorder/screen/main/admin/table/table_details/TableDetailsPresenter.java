@@ -1,4 +1,4 @@
-package com.e15cn2.restaurantorder.screen.main.admin.table.tables_list;
+package com.e15cn2.restaurantorder.screen.main.admin.table.table_details;
 
 import com.e15cn2.restaurantorder.data.repository.TableRepository;
 import com.e15cn2.restaurantorder.utils.Constants;

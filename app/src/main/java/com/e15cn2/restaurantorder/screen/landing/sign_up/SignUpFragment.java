@@ -5,6 +5,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.application.AppContext;
 import com.e15cn2.restaurantorder.data.repository.UserRepository;
 import com.e15cn2.restaurantorder.data.source.remote.UserRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentSignUpBinding;
@@ -41,12 +42,12 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding>
     @Override
     public void showMessage(String msg) {
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_sign_up_success), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_sign_up_success), Toast.LENGTH_SHORT).show();
             onSignUpSuccess();
         } else if (msg.equals(Constants.JSonKey.MESSAGE_EXISTED)) {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_sign_up_existed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_sign_up_existed), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_sign_up_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_sign_up_failed), Toast.LENGTH_SHORT).show();
         }
     }
 

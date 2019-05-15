@@ -66,7 +66,7 @@
     <string name="text_from">\u0020From\u0020</string>
     <string name="text_from_not_cap">\u0020from\u0020</string>
     <string name="text_to">\u0020to\u0020</string>
-    <string name="text_number">Number:\u0020</string>
+    <string name="text_number">Table number:\u0020</string>
     <string name="text_notifty_select_time_reserve">Please select time you want!</string>
     <string name="text_ok">OK</string>
     <string name="text_reserve_table_failed">Maybe has something wrong. Try again later!</string>
@@ -74,4 +74,15 @@
     <string name="text_on">On</string>
     <string name="text_off">Off</string>
     <string name="text_existed_reservation">Reservation has already existed!</string>
+    <string name="text_add_to_cart">Add to cart</string>
+    <string name="text_close">Close</string>
+    <string name="text_plus">+</string>
+    <string name="text_minus">-</string>
+    <string name="text_0">0</string>
+    <string name="text_quantity">Quantity</string>
+    <string name="text_phone">Phone:\u0020</string>
+    <string name="text_time_booking">Time booking:\u0020</string>
+    <string name="text_email_booking">Email:\u0020</string>
+    <string name="text_name">Name:\u0020</string>
+    <!--add_item-->
 </resources>

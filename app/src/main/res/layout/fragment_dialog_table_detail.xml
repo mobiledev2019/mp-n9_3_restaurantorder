@@ -6,7 +6,7 @@
 
         <variable
             name="listener"
-            type="com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.TableDetailsDialogFragment" />
+            type="com.e15cn2.restaurantorder.screen.main.admin.table.table_details.TableDetailsDialogFragment" />
 
         <variable
             name="item"

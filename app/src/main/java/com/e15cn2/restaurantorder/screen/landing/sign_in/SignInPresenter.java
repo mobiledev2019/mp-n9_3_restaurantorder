@@ -24,8 +24,8 @@ public class SignInPresenter implements SignInContract.Presenter {
     }
 
     @Override
-    public void signIn(String email, String password) {
-        mRepository.signIn(email, password).enqueue(new Callback<ResponseBody>() {
+    public void signIn(String email, String password, String token) {
+        mRepository.signIn(email, password, token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {

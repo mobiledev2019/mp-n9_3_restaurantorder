@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Menu;
+import com.e15cn2.restaurantorder.data.model.Table;
 import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.data.repository.MenuRepository;
 import com.e15cn2.restaurantorder.data.source.remote.MenuRemoteDataSource;
@@ -29,6 +30,7 @@ import static com.e15cn2.restaurantorder.utils.Constants.UserKey.IS_ADMIN;
 public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
         implements MenuContract.View, OnMenuClickListener {
     private static final String ARGUMENT_USER = "ARGUMENT_USER";
+    private static final String ARGUMENT_TABLE = "ARGUMENT_TABLE";
     private MenuPresenter mPresenter;
     private BaseAdapter<Menu> mAdapter;
     private Animation mFabOpen;
@@ -39,11 +41,21 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
     private List<Menu> mMenus;
     private OnMenuClickListener mCallback;
     private User mUser;
+    private Table mTable;
 
     public static MenuFragment newInstance(User user) {
         MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARGUMENT_USER, user);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static MenuFragment newInstance(User user, Table table) {
+        MenuFragment fragment = new MenuFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(ARGUMENT_USER, user);
+        args.putParcelable(ARGUMENT_TABLE, table);
         fragment.setArguments(args);
         return fragment;
     }
@@ -77,13 +89,14 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
         binding.setListenerMenuFrag(this);
         if (getArguments() != null) {
             mUser = getArguments().getParcelable(ARGUMENT_USER);
+            mTable = getArguments().getParcelable(ARGUMENT_TABLE);
         }
     }
 
     @Override
     public void showMenus(List<Menu> menus) {
         mMenus = menus;
-        mAdapter.setDatas(menus);
+        mAdapter.setData(menus);
     }
 
 
@@ -104,7 +117,7 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
             ActivityUtils.replaceFragment(
                     getFragmentManager(),
                     R.id.frame_main,
-                    UserItemFragment.newInstance(menu));
+                    UserItemFragment.newInstance(mUser, mTable, menu));
 
         }
         mCallback.onMenuClicked(menu);
@@ -119,7 +132,7 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
     @Override
     public void onStart() {
         super.onStart();
-        if (mUser.getIsAdmin()==IS_ADMIN){
+        if (mUser.getIsAdmin() == IS_ADMIN) {
             setFabAddVisible();
         }
     }

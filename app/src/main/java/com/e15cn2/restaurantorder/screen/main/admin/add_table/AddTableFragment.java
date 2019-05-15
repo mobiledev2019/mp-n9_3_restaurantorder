@@ -5,6 +5,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.application.AppContext;
 import com.e15cn2.restaurantorder.data.repository.TableRepository;
 import com.e15cn2.restaurantorder.data.source.remote.TableRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentAddTableBinding;
@@ -47,10 +48,10 @@ public class AddTableFragment extends BaseFragment<FragmentAddTableBinding>
     @Override
     public void showMessage(String msg) {
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_add_table_success), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_add_table_success), Toast.LENGTH_SHORT).show();
             getFragmentManager().popBackStack();
         } else {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.text_add_table_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), AppContext.getInstance().getString(R.string.text_add_table_failed), Toast.LENGTH_SHORT).show();
         }
     }
 

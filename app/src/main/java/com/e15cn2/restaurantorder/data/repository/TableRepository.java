@@ -34,12 +34,12 @@ public class TableRepository implements TableDataSource.Remote {
     }
 
     @Override
-    public Call<ResponseBody> reserveTable(String number, String timeBooking, String userName, String userEmail, String userPhone) {
-        return mRemote.reserveTable(number, timeBooking, userName, userEmail, userPhone);
+    public Call<ResponseBody> reserveTable(String number, String timeBooking, String userId, String phoneBooking) {
+        return mRemote.reserveTable(number, timeBooking, userId, phoneBooking);
     }
 
     @Override
     public Call<ResponseBody> updateTableStatus(String number, int status) {
-        return mRemote.updateTableStatus(number,status);
+        return mRemote.updateTableStatus(number, status);
     }
 }

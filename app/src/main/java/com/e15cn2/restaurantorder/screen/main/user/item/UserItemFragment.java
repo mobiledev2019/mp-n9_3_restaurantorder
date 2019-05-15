@@ -2,17 +2,18 @@ package com.e15cn2.restaurantorder.screen.main.user.item;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Item;
 import com.e15cn2.restaurantorder.data.model.Menu;
+import com.e15cn2.restaurantorder.data.model.Table;
+import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.data.repository.ItemRepository;
 import com.e15cn2.restaurantorder.data.source.remote.ItemRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentRecyclerViewBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
+import com.e15cn2.restaurantorder.screen.main.user.add_item.AddItemToCartFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,20 @@ import static com.e15cn2.restaurantorder.utils.Constants.JsonItemKey.IS_ON;
 public class UserItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
         implements UserItemContract.View, UserOnItemClickListener {
     private static final String ARGUMENT_MENU = "ARGUMENT_MENU";
+    private static final String ARGUMENT_TABLE = "ARGUMENT_TABLE";
+    private static final String ARGUMENT_USER = "ARGUMENT_USER";
     private BaseAdapter<Item> mAdapter;
     private UserItemContract.Presenter mPresenter;
     private static final int COLUMN_COUNT = 2;
+    private Table mTable;
+    private User mUser;
 
-    public static UserItemFragment newInstance(Menu menu) {
+    public static UserItemFragment newInstance(User user, Table table, Menu menu) {
         UserItemFragment fragment = new UserItemFragment();
         Bundle args = new Bundle();
+        args.putParcelable(ARGUMENT_TABLE, table);
         args.putParcelable(ARGUMENT_MENU, menu);
+        args.putParcelable(ARGUMENT_USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,6 +56,10 @@ public class UserItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), COLUMN_COUNT);
         binding.recyclerView.setAdapter(mAdapter);
         binding.recyclerView.setLayoutManager(gridLayoutManager);
+        if (getArguments() != null) {
+            mTable = getArguments().getParcelable(ARGUMENT_TABLE);
+            mUser = getArguments().getParcelable(ARGUMENT_USER);
+        }
     }
 
     @Override
@@ -62,8 +73,7 @@ public class UserItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
                 }
             }
         }
-        Log.e("AAA", "showItems: " + itemsShow.size() );
-        mAdapter.setDatas(itemsShow);
+        mAdapter.setData(itemsShow);
     }
 
     @Override
@@ -77,8 +87,9 @@ public class UserItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
     }
 
     @Override
-    public void onMenuClicked(Item item, int position) {
-        Toast.makeText(getActivity(), item.getName(), Toast.LENGTH_SHORT).show();
-        //TODO
+    public void onItemClicked(Item item, int position) {
+        assert getFragmentManager() != null;
+        AddItemToCartFragment.newInstance(mUser, mTable, item)
+                .show(getFragmentManager(), null);
     }
 }
