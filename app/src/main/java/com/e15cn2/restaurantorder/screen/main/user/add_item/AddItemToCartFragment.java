@@ -1,10 +1,10 @@
 package com.e15cn2.restaurantorder.screen.main.user.add_item;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,7 @@ public class AddItemToCartFragment extends DialogFragment {
     private Table mTable;
     private Item mItem;
     private int mQuantity;
-    String TAG = "AddItemToCartFragment";
+    private OnCartItemListener mCallback;
 
     public static AddItemToCartFragment newInstance(User user, Table table, Item item) {
         AddItemToCartFragment fragment = new AddItemToCartFragment();
@@ -34,6 +34,16 @@ public class AddItemToCartFragment extends DialogFragment {
         args.putParcelable(ARGUMENT_TABLE, table);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (OnCartItemListener) context;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
     }
 
     @Nullable
@@ -79,9 +89,12 @@ public class AddItemToCartFragment extends DialogFragment {
 
     public void onAddToCart() {
         double price = mItem.getPrice() * mQuantity;
-        CartItem cartItem = new CartItem(mItem, mTable, mUser, mQuantity, price);
-        Log.d(TAG, "onAddToCart: " + cartItem.toString());
-        //TODO
+        CartItem cartItem = new CartItem(mItem, mQuantity, price);
+        mCallback.onAdded(mTable, cartItem);
         this.dismiss();
+    }
+
+    public interface OnCartItemListener {
+        void onAdded(Table table, CartItem cartItem);
     }
 }

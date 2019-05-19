@@ -11,10 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.application.AppContext;
+import com.e15cn2.restaurantorder.data.model.Cart;
+import com.e15cn2.restaurantorder.data.model.CartItem;
 import com.e15cn2.restaurantorder.data.model.Menu;
 import com.e15cn2.restaurantorder.data.model.Table;
 import com.e15cn2.restaurantorder.data.model.User;
@@ -22,22 +26,31 @@ import com.e15cn2.restaurantorder.databinding.ActivityUserMainBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseActivity;
 import com.e15cn2.restaurantorder.screen.landing.LandingActivity;
 import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
-import com.e15cn2.restaurantorder.screen.main.admin.table.AdminTableFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.TablesListFragment;
+import com.e15cn2.restaurantorder.screen.main.user.add_item.AddItemToCartFragment;
+import com.e15cn2.restaurantorder.screen.main.user.cart.CartFragment;
 import com.e15cn2.restaurantorder.screen.main.user.home.UserHomeFragment;
 import com.e15cn2.restaurantorder.screen.main.user.table.UserTableFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
+import com.nex3z.notificationbadge.NotificationBadge;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         implements NavigationView.OnNavigationItemSelectedListener,
-        MenuFragment.OnMenuClickListener, TablesListFragment.OnTableClickListener {
+        MenuFragment.OnMenuClickListener, TablesListFragment.OnTableClickListener,
+        AddItemToCartFragment.OnCartItemListener, CartFragment.OnCartItemChangedListener {
     public static final String EXTRA_USER =
             "com.e15cn2.restaurantorder.screen.main.user.EXTRA_USER";
     private User mUser;
     private String mFragmentClassName;
+    private NotificationBadge mBadge;
+    private List<CartItem> mCartItems;
+    private Table mTable;
 
     public static Intent getUserMainIntent(Context context, User user) {
         Intent intent = new Intent(context, UserMainActivity.class);
@@ -52,6 +65,7 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
 
     @Override
     protected void initData() {
+        mCartItems = new ArrayList<>();
         if (getIntent() != null) {
             mUser = getIntent().getParcelableExtra(EXTRA_USER);
             setUserInfor(mUser);
@@ -72,6 +86,25 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.user_home, menu);
+        final View view = menu.findItem(R.id.menuCart).getActionView();
+        mBadge = view.findViewById(R.id.badge);
+        MenuItem item = menu.findItem(R.id.menuCart);
+        item.getActionView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCartItems.size() > 0) {
+                    actionNavigation(CartFragment.newInstance(getCart(mCartItems)));
+                } else {
+                    Toast.makeText(UserMainActivity.this, AppContext.getInstance().getString(R.string.text_cart_empty), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        return true;
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -170,6 +203,8 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_table));
         } else if (mFragmentClassName.equals(MenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_menu));
+        }else if (mFragmentClassName.equals(CartFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_cart));
         }
     }
 
@@ -181,8 +216,50 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
 
     }
 
+    public void updateBadgeCount() {
+        if (mBadge == null) return;
+        if (mCartItems.size() == 0)
+            mBadge.setVisibility(View.INVISIBLE);
+        else {
+            mBadge.setVisibility(View.VISIBLE);
+            mBadge.setText(String.valueOf(mCartItems.size()));
+        }
+
+    }
+
+    private Cart getCart(List<CartItem> cartItems) {
+        double price = 0;
+        for (CartItem cartItem : cartItems) {
+            price = price + cartItem.getPrice();
+        }
+        Cart cart = new Cart(System.currentTimeMillis(), mUser, mTable, cartItems, price);
+        return cart;
+    }
+
     @Override
     public void onMakeAnOrder(Table table) {
-        actionNavigation(MenuFragment.newInstance(mUser,table));
+        actionNavigation(MenuFragment.newInstance(mUser, table));
+    }
+
+    @Override
+    public void onAdded(Table table, CartItem cartItem) {
+        mCartItems.add(cartItem);
+        mTable = table;
+        updateBadgeCount();
+    }
+
+    @Override
+    public void onRemove(List<CartItem> cartItems) {
+        mCartItems = cartItems;
+        updateBadgeCount();
+    }
+
+    public Cart getNewCart(){
+        double price = 0;
+        for (CartItem cartItem : mCartItems) {
+            price = price + cartItem.getPrice();
+        }
+        Cart cart = new Cart(System.currentTimeMillis(), mUser, mTable, mCartItems, price);
+        return cart;
     }
 }

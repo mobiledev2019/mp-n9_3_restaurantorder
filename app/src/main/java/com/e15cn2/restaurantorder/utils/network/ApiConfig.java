@@ -78,12 +78,26 @@ public interface ApiConfig {
 
     @FormUrlEncoded
     @POST(Constants.Network.PUSH_NOTIFICATION_TO_ADMIN)
-    Call<ResponseBody> userPushBigNotification(@Field("title") String title,
-                                               @Field("message") String message,
-                                               @Field("image") String image);
+    Call<ResponseBody> userPushBigNotification(@Field(Constants.JsonNotificationKey.TITLE) String title,
+                                               @Field(Constants.JsonNotificationKey.MESSAGE) String message,
+                                               @Field(Constants.JsonNotificationKey.IMAGE) String image);
 
     @FormUrlEncoded
     @POST(Constants.Network.PUSH_NOTIFICATION_TO_ADMIN)
-    Call<ResponseBody> userPushSmallNotification(@Field("title") String title,
-                                                 @Field("message") String message);
+    Call<ResponseBody> userPushSmallNotification(@Field(Constants.JsonNotificationKey.TITLE) String title,
+                                                 @Field(Constants.JsonNotificationKey.MESSAGE) String message);
+
+    @FormUrlEncoded
+    @POST(Constants.Network.UPLOAD_CART)
+    Call<ResponseBody> uploadCart(@Field(Constants.JsonCartKey.ID) long cartId,
+                                  @Field(Constants.JsonCartKey.USER_ID) String userId,
+                                  @Field(Constants.JsonCartKey.TABLE_NUMBER) String tableNumber,
+                                  @Field(Constants.JsonCartKey.PRICE) double price);
+
+    @FormUrlEncoded
+    @POST(Constants.Network.UPLOAD_CART_ITEM)
+    Call<ResponseBody> uploadCartItem(@Field(Constants.JsonCartItemKey.ITEM_ID) int itemId,
+                                      @Field(Constants.JsonCartItemKey.QUANTITY) int quantity,
+                                      @Field(Constants.JsonCartItemKey.PRICE) double price,
+                                      @Field(Constants.JsonCartItemKey.CART_ID) long cartId);
 }

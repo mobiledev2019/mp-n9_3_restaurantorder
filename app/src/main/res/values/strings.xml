@@ -74,6 +74,7 @@
     <string name="text_on">On</string>
     <string name="text_off">Off</string>
     <string name="text_existed_reservation">Reservation has already existed!</string>
+    <!--add_item-->
     <string name="text_add_to_cart">Add to cart</string>
     <string name="text_close">Close</string>
     <string name="text_plus">+</string>
@@ -84,5 +85,8 @@
     <string name="text_time_booking">Time booking:\u0020</string>
     <string name="text_email_booking">Email:\u0020</string>
     <string name="text_name">Name:\u0020</string>
-    <!--add_item-->
+    <string name="text_cart_empty">Nothing on your cart</string>
+    <string name="text_inform_order_success">We have got your orders. We will contact to you to confirm after few minutes.</string>
+    <string name="text_inform_order_failed">Some thing has been wrong. Try it later!</string>
+    <string name="action_cart">Your cart</string>
 </resources>

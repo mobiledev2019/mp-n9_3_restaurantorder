@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.e15cn2.restaurantorder.R;
+import com.e15cn2.restaurantorder.data.model.CartItem;
 import com.e15cn2.restaurantorder.data.model.TableBooking;
 import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 
@@ -96,7 +97,26 @@ public class BindingUtils {
                 R.layout.item_table_booking);
         adapter.setData(tableBookings);
         recyclerView.setAdapter(adapter);
+        createTouchHelper(recyclerView, adapter, tableBookings);
 
+    }
+
+    @BindingAdapter({"recyclerCartItems"})
+    public static void setRecyclerViewCartItems(RecyclerView recyclerView, final List<CartItem> cartItems) {
+        final BaseAdapter<CartItem> adapter = new BaseAdapter<>(
+                recyclerView.getContext(),
+                R.layout.item_cart_item);
+        adapter.setData(cartItems);
+        recyclerView.setAdapter(adapter);
+        createTouchHelper(recyclerView, adapter, cartItems);
+    }
+
+    @BindingAdapter("quantity")
+    public static void setQuantity(TextView textView, int quantity){
+        textView.setText(String.valueOf(quantity));
+    }
+
+    private static <T> void createTouchHelper(RecyclerView recyclerView, final BaseAdapter<T> adapter, final List<T> data) {
         ItemTouchHelper mHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -106,14 +126,14 @@ public class BindingUtils {
                                   @NonNull RecyclerView.ViewHolder target) {
                 int from = viewHolder.getAdapterPosition();
                 int to = target.getAdapterPosition();
-                Collections.swap(tableBookings, from, to);
+                Collections.swap(data, from, to);
                 adapter.notifyItemMoved(from, to);
                 return true;
             }
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                tableBookings.remove(viewHolder.getAdapterPosition());
+                data.remove(viewHolder.getAdapterPosition());
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
         });

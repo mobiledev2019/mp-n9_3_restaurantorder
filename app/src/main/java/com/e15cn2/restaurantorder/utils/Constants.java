@@ -17,6 +17,8 @@ public class Constants {
         public static final String UPDATE_TABLE_STATUS = "update_table_status.php";
         public static final String PUSH_NOTIFICATION_TO_ADMIN = "push_notification_to_admin.php";
         public static final String PUSH_NOTIFICATION_TO_USER = "push_notification_to_user.php";
+        public static final String UPLOAD_CART = "upload_cart.php";
+        public static final String UPLOAD_CART_ITEM= "upload_cart_item.php";
     }
 
     public class JSonKey {
@@ -87,5 +89,23 @@ public class Constants {
         public static final String MESSAGE = "message";
         public static final String IMAGE = "image";
         public static final String RES_NULL = "null";
+    }
+
+    public static class JsonCartKey {
+        public static final String ID = "id";
+        public static final String USER_ID = "user_id";
+        public static final String USER = "user";
+        public static final String TABLE = "table";
+        public static final String TABLE_NUMBER = "table_number";
+        public static final String PRICE = "price";
+        public static final String TIME = "time";
+    }
+
+    public static class JsonCartItemKey {
+        public static final String ITEM_ID = "item_id";
+        public static final String ITEM = "item";
+        public static final String QUANTITY = "quantity";
+        public static final String PRICE = "price";
+        public static final String CART_ID = "cart_id";
     }
 }

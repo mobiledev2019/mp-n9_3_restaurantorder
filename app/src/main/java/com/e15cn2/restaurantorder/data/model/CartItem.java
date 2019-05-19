@@ -7,23 +7,29 @@ import java.io.Serializable;
 
 public class CartItem implements Parcelable, Serializable {
     private Item mItem;
-    private Table mTable;
-    private User mUser;
     private int mQuantity;
     private double mPrice;
 
-    public CartItem(Item item, Table table, User user, int quantity, double price) {
+    public CartItem(Item item, int quantity, double price) {
         mItem = item;
-        mTable = table;
-        mUser = user;
         mQuantity = quantity;
         mPrice = price;
     }
 
+    public Item getItem() {
+        return mItem;
+    }
+
+    public int getQuantity() {
+        return mQuantity;
+    }
+
+    public double getPrice() {
+        return mPrice;
+    }
+
     protected CartItem(Parcel in) {
         mItem = in.readParcelable(Item.class.getClassLoader());
-        mTable = in.readParcelable(Table.class.getClassLoader());
-        mUser = in.readParcelable(User.class.getClassLoader());
         mQuantity = in.readInt();
         mPrice = in.readDouble();
     }
@@ -48,8 +54,6 @@ public class CartItem implements Parcelable, Serializable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(mItem, flags);
-        dest.writeParcelable(mTable, flags);
-        dest.writeParcelable(mUser, flags);
         dest.writeInt(mQuantity);
         dest.writeDouble(mPrice);
     }
@@ -58,8 +62,6 @@ public class CartItem implements Parcelable, Serializable {
     public String toString() {
         return "CartItem{" +
                 "mItem=" + mItem.getName() +
-                ", mTable=" + mTable.getNumber() +
-                ", mUser=" + mUser.getName() +
                 ", mQuantity=" + mQuantity +
                 ", mPrice=" + mPrice +
                 '}';
