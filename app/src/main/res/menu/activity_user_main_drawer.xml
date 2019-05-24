@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_home"
             android:title="@string/action_home" />
         <item
-            android:id="@+id/action_menu"
-            android:icon="@drawable/ic_menu"
-            android:title="@string/action_menu" />
+            android:id="@+id/action_order_detail"
+            android:icon="@drawable/ic_order_details"
+            android:title="@string/action_your_orders" />
     </group>
 
     <item android:title="@string/text_more">

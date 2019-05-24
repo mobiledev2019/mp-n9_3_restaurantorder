@@ -11,6 +11,9 @@ public interface CartContract {
                             int quantity,
                             double price,
                             long cartId);
+
+        void pushSmallNotification(String title,
+                                   String msg);
     }
 
     interface View {

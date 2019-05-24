@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home"
             android:title="@string/action_home" />
         <item
+            android:id="@+id/action_all_orders"
+            android:icon="@drawable/ic_order_details"
+            android:title="@string/action_all_orders" />
+        <item
             android:id="@+id/action_menu"
             android:icon="@drawable/ic_menu"
             android:title="@string/action_menu" />

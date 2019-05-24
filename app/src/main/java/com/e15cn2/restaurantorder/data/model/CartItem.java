@@ -3,11 +3,15 @@ package com.e15cn2.restaurantorder.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
+import com.e15cn2.restaurantorder.utils.Constants;
+import com.google.gson.annotations.SerializedName;
 
-public class CartItem implements Parcelable, Serializable {
+public class CartItem implements Parcelable {
+    @SerializedName(Constants.JsonCartItemKey.ITEM)
     private Item mItem;
+    @SerializedName(Constants.JsonCartItemKey.QUANTITY)
     private int mQuantity;
+    @SerializedName(Constants.JsonCartItemKey.PRICE)
     private double mPrice;
 
     public CartItem(Item item, int quantity, double price) {

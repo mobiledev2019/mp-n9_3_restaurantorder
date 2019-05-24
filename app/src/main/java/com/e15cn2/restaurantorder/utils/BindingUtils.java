@@ -2,6 +2,7 @@ package com.e15cn2.restaurantorder.utils;
 
 import android.databinding.BindingAdapter;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
@@ -102,17 +103,18 @@ public class BindingUtils {
     }
 
     @BindingAdapter({"recyclerCartItems"})
-    public static void setRecyclerViewCartItems(RecyclerView recyclerView, final List<CartItem> cartItems) {
-        final BaseAdapter<CartItem> adapter = new BaseAdapter<>(
+    public static void setRecyclerViewCartItems(RecyclerView recyclerView, List<CartItem> cartItems) {
+        BaseAdapter<CartItem> adapter = new BaseAdapter<>(
                 recyclerView.getContext(),
                 R.layout.item_cart_item);
         adapter.setData(cartItems);
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
-        createTouchHelper(recyclerView, adapter, cartItems);
     }
 
     @BindingAdapter("quantity")
-    public static void setQuantity(TextView textView, int quantity){
+    public static void setQuantity(TextView textView, int quantity) {
         textView.setText(String.valueOf(quantity));
     }
 
@@ -138,5 +140,27 @@ public class BindingUtils {
             }
         });
         mHelper.attachToRecyclerView(recyclerView);
+    }
+
+    @BindingAdapter("formatTimeStampSQL")
+    public static void formatTimeStampSQL(TextView textView, String timeStamp) {
+        String dd = timeStamp.substring(8, 10);
+        String MM = timeStamp.substring(5, 7);
+        String yyyy = timeStamp.substring(0, 4);
+        String time = timeStamp.substring(11, 19);
+        textView.setText(time + " " + dd + "/" + MM + "/" + yyyy);
+    }
+
+    @BindingAdapter("cartStatus")
+    public static void setCartStatus(TextView textStatus, int status) {
+        if (status == Constants.JsonCartKey.STATUS_CANCEL) {
+            textStatus.setText("CANCEL");
+        } else if (status == Constants.JsonCartKey.STATUS_PROGRESS) {
+            textStatus.setText("IN PROGRESS");
+        } else if (status == Constants.JsonCartKey.STATUS_DISTRIBUTED) {
+            textStatus.setText("DISTRIBUTED");
+        } else {
+            textStatus.setText("PAID");
+        }
     }
 }

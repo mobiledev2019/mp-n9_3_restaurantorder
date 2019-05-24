@@ -18,13 +18,16 @@ public class Constants {
         public static final String PUSH_NOTIFICATION_TO_ADMIN = "push_notification_to_admin.php";
         public static final String PUSH_NOTIFICATION_TO_USER = "push_notification_to_user.php";
         public static final String UPLOAD_CART = "upload_cart.php";
-        public static final String UPLOAD_CART_ITEM= "upload_cart_item.php";
+        public static final String UPLOAD_CART_ITEM = "upload_cart_item.php";
+        public static final String ADMIN_GET_CARTS = "admin_get_carts.php";
+        public static final String USER_GET_CARTS = "user_get_carts.php";
     }
 
     public class JSonKey {
         public static final String MESSAGE = "message";
         public static final String MESSAGE_SUCCESS = "SUCCESS";
         public static final String MESSAGE_EXISTED = "EXISTED";
+        public static final String MESSAGE_OUTPUT = "output";
         public static final String PARAMETERS_MISSING = "PARAMETERS MISSING";
         public static final String INVALID_REQUEST = "INVALID_REQUEST";
     }
@@ -41,6 +44,8 @@ public class Constants {
     }
 
     public class JsonUserKey extends JsonCommonKey {
+        public static final String USER_ID = "user_id";
+        public static final String USER_NAME = "user_name";
         public static final String DOB = "dob";
         public static final String EMAIL = "email";
         public static final String PHONE = "phone";
@@ -61,12 +66,14 @@ public class Constants {
         public static final String MENU = "menu";
         public static final String PRICE = "price";
         public static final String DESCRIPTION = "description";
+        public static final String ITEM_STATUS = "item_status";
     }
 
     public class JsonTableKey extends JsonCommonKey {
         public static final String TABLE_BOOKINGS = "table_bookings";
         public static final String TYPE = "type";
         public static final String NUMBER = "number";
+        public static final String TABLE_STATUS = "table_status";
     }
 
     public class JSonTableBookingKey extends JsonCommonKey {
@@ -91,21 +98,27 @@ public class Constants {
         public static final String RES_NULL = "null";
     }
 
-    public static class JsonCartKey {
-        public static final String ID = "id";
+    public class JsonCartKey extends JsonCommonKey {
+        public static final String ID = "cart_id";
         public static final String USER_ID = "user_id";
         public static final String USER = "user";
         public static final String TABLE = "table";
         public static final String TABLE_NUMBER = "table_number";
-        public static final String PRICE = "price";
+        public static final String PRICE = "cart_price";
         public static final String TIME = "time";
+        public static final String CART_STATUS = "cart_status";
+        public static final String CART_ITEMS = "cart_items";
+        public static final int STATUS_PROGRESS = 1;
+        public static final int STATUS_CANCEL = 0;
+        public static final int STATUS_DISTRIBUTED = 2;
+        public static final int STATUS_PAID = 3;
     }
 
-    public static class JsonCartItemKey {
+    public class JsonCartItemKey {
         public static final String ITEM_ID = "item_id";
         public static final String ITEM = "item";
         public static final String QUANTITY = "quantity";
-        public static final String PRICE = "price";
+        public static final String PRICE = "cart_item_price";
         public static final String CART_ID = "cart_id";
     }
 }

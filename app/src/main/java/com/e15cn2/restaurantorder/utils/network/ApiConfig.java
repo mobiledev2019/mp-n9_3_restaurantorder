@@ -1,5 +1,6 @@
 package com.e15cn2.restaurantorder.utils.network;
 
+import com.e15cn2.restaurantorder.data.model.Cart;
 import com.e15cn2.restaurantorder.data.model.Item;
 import com.e15cn2.restaurantorder.data.model.Menu;
 import com.e15cn2.restaurantorder.data.model.Table;
@@ -54,7 +55,7 @@ public interface ApiConfig {
     @FormUrlEncoded
     @POST(Constants.Network.UPDATE_ITEM_STATUS)
     Call<ResponseBody> updateItemStatus(@Field(Constants.JsonItemKey.ID) int id,
-                                        @Field(Constants.JsonItemKey.STATUS) int status);
+                                        @Field(Constants.JsonItemKey.ITEM_STATUS) int status);
 
     @FormUrlEncoded
     @POST(Constants.Network.ADD_TABLE)
@@ -74,7 +75,7 @@ public interface ApiConfig {
     @FormUrlEncoded
     @POST(Constants.Network.UPDATE_TABLE_STATUS)
     Call<ResponseBody> updateTableStatus(@Field(Constants.JsonTableKey.NUMBER) String number,
-                                         @Field(Constants.JsonTableKey.STATUS) int status);
+                                         @Field(Constants.JsonTableKey.TABLE_STATUS) int status);
 
     @FormUrlEncoded
     @POST(Constants.Network.PUSH_NOTIFICATION_TO_ADMIN)
@@ -100,4 +101,13 @@ public interface ApiConfig {
                                       @Field(Constants.JsonCartItemKey.QUANTITY) int quantity,
                                       @Field(Constants.JsonCartItemKey.PRICE) double price,
                                       @Field(Constants.JsonCartItemKey.CART_ID) long cartId);
+
+    @GET(Constants.Network.ADMIN_GET_CARTS)
+    Call<List<Cart>> getCartsAdmin();
+
+    @FormUrlEncoded
+    @POST(Constants.Network.USER_GET_CARTS)
+    Call<ResponseBody> getCartsUser(@Field(Constants.JsonUserKey.USER_ID) String userId);
+
+
 }

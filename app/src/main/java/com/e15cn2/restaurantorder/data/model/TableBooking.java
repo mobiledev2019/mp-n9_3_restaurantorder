@@ -6,9 +6,7 @@ import android.os.Parcelable;
 import com.e15cn2.restaurantorder.utils.Constants;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class TableBooking implements Serializable, Parcelable {
+public class TableBooking implements Parcelable {
     @SerializedName(Constants.JSonTableBookingKey.ID)
     private long mId;
     @SerializedName(Constants.JSonTableBookingKey.TABLE_NUMBER)
@@ -80,5 +78,17 @@ public class TableBooking implements Serializable, Parcelable {
         dest.writeString(mUsername);
         dest.writeString(mUserEmail);
         dest.writeString(mPhoneBooking);
+    }
+
+    @Override
+    public String toString() {
+        return "TableBooking{" +
+                "mId=" + mId +
+                ", mTableNumber=" + mTableNumber +
+                ", mTimeBooking='" + mTimeBooking + '\'' +
+                ", mUsername='" + mUsername + '\'' +
+                ", mUserEmail='" + mUserEmail + '\'' +
+                ", mPhoneBooking='" + mPhoneBooking + '\'' +
+                '}';
     }
 }

@@ -89,4 +89,14 @@
     <string name="text_inform_order_success">We have got your orders. We will contact to you to confirm after few minutes.</string>
     <string name="text_inform_order_failed">Some thing has been wrong. Try it later!</string>
     <string name="action_cart">Your cart</string>
+    <!--admin_cart-->
+    <string name="text_customer">Customer:\u0020</string>
+    <string name="text_order_time">Order Time:\u0020</string>
+    <string name="text_payment">Payment:\u0020</string>
+    <string name="text_item">Item</string>
+    <string name="text_price">Price</string>
+    <string name="text_cart_id">Cart ID:\u0020</string>
+    <string name="text_status">Status:\u0020</string>
+    <string name="action_your_orders">Your Orders</string>
+    <string name="action_all_orders">All orders</string>
 </resources>

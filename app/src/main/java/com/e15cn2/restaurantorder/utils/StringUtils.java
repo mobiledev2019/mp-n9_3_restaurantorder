@@ -107,4 +107,11 @@ public class StringUtils {
             return 0;
         }
     }
+
+    public static String formatFacebookDate(String date) {
+        String dd = date.substring(3, 6);
+        String MM = date.substring(0, 3);
+        String yyyy = date.substring(6, 10);
+        return dd + MM + yyyy;
+    }
 }

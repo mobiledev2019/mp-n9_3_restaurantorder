@@ -6,9 +6,7 @@ import android.os.Parcelable;
 import com.e15cn2.restaurantorder.utils.Constants;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Menu implements Serializable, Parcelable {
+public class Menu implements Parcelable {
     @SerializedName(Constants.JsonMenuKey.ID)
     private int mId;
     @SerializedName(Constants.JsonMenuKey.NAME)

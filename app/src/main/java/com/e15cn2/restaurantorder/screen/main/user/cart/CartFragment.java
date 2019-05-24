@@ -10,13 +10,14 @@ import com.e15cn2.restaurantorder.application.AppContext;
 import com.e15cn2.restaurantorder.data.model.Cart;
 import com.e15cn2.restaurantorder.data.model.CartItem;
 import com.e15cn2.restaurantorder.data.repository.CartRepository;
+import com.e15cn2.restaurantorder.data.repository.FCMRepository;
 import com.e15cn2.restaurantorder.data.source.remote.CartRemoteDataSource;
+import com.e15cn2.restaurantorder.data.source.remote.FCMRemoteDataSource;
 import com.e15cn2.restaurantorder.databinding.FragmentCartBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
-import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
 import com.e15cn2.restaurantorder.screen.main.user.UserMainActivity;
-import com.e15cn2.restaurantorder.screen.main.user.home.UserHomeFragment;
+import com.e15cn2.restaurantorder.screen.main.user.order_detail.UserOrderDetailFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.Constants;
 
@@ -30,6 +31,8 @@ public class CartFragment extends BaseFragment<FragmentCartBinding>
     private List<CartItem> mCartItems;
     private OnCartItemChangedListener mCallback;
     private CartContract.Presenter mPresenter;
+    private String mNotificationTitle;
+    private String mNotificationMessage;
 
     public static CartFragment newInstance(Cart cart) {
         CartFragment fragment = new CartFragment();
@@ -57,9 +60,11 @@ public class CartFragment extends BaseFragment<FragmentCartBinding>
     @Override
     protected void initData() {
         mPresenter = new CartPresenter(
-                CartRepository.getInstance(CartRemoteDataSource.getInstance()), this);
+                CartRepository.getInstance(CartRemoteDataSource.getInstance()),
+                FCMRepository.getInstance(FCMRemoteDataSource.getInstance()),
+                this);
         binding.setFragment(this);
-        mAdapter = new BaseAdapter<>(getActivity(), R.layout.item_cart_item);
+        mAdapter = new BaseAdapter<>(getActivity(), R.layout.item_cart_item_user);
         mAdapter.setListener(this);
         if (getArguments() != null) {
             mCart = getArguments().getParcelable(ARGUMENT_CART);
@@ -84,12 +89,12 @@ public class CartFragment extends BaseFragment<FragmentCartBinding>
     @Override
     public void showMessage(String msg) {
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
-            //TODO handle event success. Go to cart detail of user
-            getFragmentManager().popBackStack();
-//            ActivityUtils.replaceFragment(
-//                    getFragmentManager(),
-//                    R.id.frame_main,
-//                    MenuFragment.newInstance(mCart.getUser()));
+            mPresenter.pushSmallNotification(mNotificationTitle, mNotificationMessage);
+            mCartItems.clear();
+            ActivityUtils.replaceFragment(
+                    getFragmentManager(),
+                    R.id.frame_main,
+                    UserOrderDetailFragment.newInstance(mCart.getUser()));
         } else {
             Toast.makeText(getActivity(),
                     AppContext.getInstance().getString(R.string.text_inform_order_failed),
@@ -107,6 +112,8 @@ public class CartFragment extends BaseFragment<FragmentCartBinding>
     }
 
     public void onOrder() {
+        mNotificationTitle = AppContext.getInstance().getString(R.string.text_cart_id) + mCart.getId();
+        mNotificationMessage = AppContext.getInstance().getString(R.string.text_customer) + mCart.getUser().getName() + " | " + AppContext.getInstance().getString(R.string.text_number) + mCart.getTable().getNumber();
         if (mCartItems.size() > 0) {
             for (CartItem cartItem : mCartItems) {
                 mPresenter.uploadCartItem(

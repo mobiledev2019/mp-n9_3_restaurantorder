@@ -1,5 +1,9 @@
 package com.e15cn2.restaurantorder.data.source;
 
+import com.e15cn2.restaurantorder.data.model.Cart;
+
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -14,5 +18,9 @@ public interface CartDataSource {
                                           int quantity,
                                           double price,
                                           long cartId);
+
+        Call<List<Cart>> getCartsAdmin();
+
+        Call<ResponseBody> getCartsUser(String userId);
     }
 }

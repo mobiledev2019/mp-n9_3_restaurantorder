@@ -245,7 +245,7 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding>
                                     .setId(String.valueOf(response.getJSONObject().getString(FB_ID)))
                                     .setName(response.getJSONObject().getString(FB_NAME))
                                     .setEmail(response.getJSONObject().getString(FB_EMAIL))
-                                    .setDob(response.getJSONObject().getString(FB_DOB))
+                                    .setDob(StringUtils.formatFacebookDate(response.getJSONObject().getString(FB_DOB)))
                                     .build();
                             mPresenter.signUpSocialAccount(
                                     user.getId(),

@@ -6,9 +6,10 @@ import android.os.Parcelable;
 import com.e15cn2.restaurantorder.utils.Constants;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Item implements Serializable, Parcelable {
+public class Item implements Parcelable {
     @SerializedName(Constants.JsonItemKey.ID)
     private int mId;
     @SerializedName(Constants.JsonItemKey.NAME)
@@ -21,9 +22,19 @@ public class Item implements Serializable, Parcelable {
     private String mDescription;
     @SerializedName(Constants.JsonItemKey.IMAGE)
     private String mImage;
-    @SerializedName(Constants.JsonItemKey.STATUS)
+    @SerializedName(Constants.JsonItemKey.ITEM_STATUS)
     private int mStatus;
 
+
+    public Item(JSONObject jsonObject) throws JSONException {
+        mId = jsonObject.getInt(Constants.JsonItemKey.ID);
+        mName = jsonObject.getString(Constants.JsonItemKey.NAME);
+        mMenu = jsonObject.getString(Constants.JsonItemKey.MENU);
+        mPrice = jsonObject.getDouble(Constants.JsonItemKey.PRICE);
+        mDescription = jsonObject.getString(Constants.JsonItemKey.DESCRIPTION);
+        mImage = jsonObject.getString(Constants.JsonItemKey.IMAGE);
+        mStatus = jsonObject.getInt(Constants.JsonItemKey.ITEM_STATUS);
+    }
 
     protected Item(Parcel in) {
         mId = in.readInt();
@@ -149,5 +160,18 @@ public class Item implements Serializable, Parcelable {
         public Item build() {
             return new Item(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "mId=" + mId +
+                ", mName='" + mName + '\'' +
+                ", mMenu='" + mMenu + '\'' +
+                ", mPrice=" + mPrice +
+                ", mDescription='" + mDescription + '\'' +
+                ", mImage='" + mImage + '\'' +
+                ", mStatus=" + mStatus +
+                '}';
     }
 }

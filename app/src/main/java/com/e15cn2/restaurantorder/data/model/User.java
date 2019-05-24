@@ -4,19 +4,39 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.e15cn2.restaurantorder.utils.Constants;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class User implements Parcelable {
+    @SerializedName(Constants.JsonUserKey.USER_ID)
     private String mId;
+    @SerializedName(Constants.JsonUserKey.USER_NAME)
     private String mName;
+    @SerializedName(Constants.JsonUserKey.DOB)
     private String mDob;
+    @SerializedName(Constants.JsonUserKey.EMAIL)
     private String mEmail;
+    @SerializedName(Constants.JsonUserKey.PHONE)
     private String mPhone;
+    @SerializedName(Constants.JsonUserKey.PASSWORD)
     private String mPassword;
+    @SerializedName(Constants.JsonUserKey.IMAGE)
     private String mImage;
+    @SerializedName(Constants.JsonUserKey.IS_ADMIN)
     private int mIsAdmin;
+
+    public User(String id, String name, String dob, String email, String phone, String password, String image, int isAdmin) {
+        mId = id;
+        mName = name;
+        mDob = dob;
+        mEmail = email;
+        mPhone = phone;
+        mPassword = password;
+        mImage = image;
+        mIsAdmin = isAdmin;
+    }
 
     public User(Builder builder) {
         mId = builder.mId;
@@ -172,5 +192,19 @@ public class User implements Parcelable {
         public User build() {
             return new User(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "mId='" + mId + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mDob='" + mDob + '\'' +
+                ", mEmail='" + mEmail + '\'' +
+                ", mPhone='" + mPhone + '\'' +
+                ", mPassword='" + mPassword + '\'' +
+                ", mImage='" + mImage + '\'' +
+                ", mIsAdmin=" + mIsAdmin +
+                '}';
     }
 }

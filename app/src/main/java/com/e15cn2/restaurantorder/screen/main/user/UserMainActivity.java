@@ -30,6 +30,7 @@ import com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.TablesList
 import com.e15cn2.restaurantorder.screen.main.user.add_item.AddItemToCartFragment;
 import com.e15cn2.restaurantorder.screen.main.user.cart.CartFragment;
 import com.e15cn2.restaurantorder.screen.main.user.home.UserHomeFragment;
+import com.e15cn2.restaurantorder.screen.main.user.order_detail.UserOrderDetailFragment;
 import com.e15cn2.restaurantorder.screen.main.user.table.UserTableFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
@@ -77,7 +78,8 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
 
     @Override
     public void onBackPressed() {
-        if (mFragmentClassName.equals(UserHomeFragment.class.getName())) {
+        if (mFragmentClassName.equals(UserHomeFragment.class.getName())
+                || mFragmentClassName.equals(UserOrderDetailFragment.class.getName())) {
             return;
         } else if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
             binding.drawerMain.closeDrawer(GravityCompat.START);
@@ -113,6 +115,9 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         switch (item.getItemId()) {
             case R.id.action_home:
                 actionNavigation(UserHomeFragment.newInstance(mUser));
+                break;
+            case R.id.action_order_detail:
+                actionNavigation(UserOrderDetailFragment.newInstance(mUser));
                 break;
             case R.id.action_sign_out:
                 signOut();
@@ -203,8 +208,12 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_table));
         } else if (mFragmentClassName.equals(MenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_menu));
-        }else if (mFragmentClassName.equals(CartFragment.class.getName())) {
+        } else if (mFragmentClassName.equals(CartFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_cart));
+        } else if (mFragmentClassName.equals(UserOrderDetailFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_your_orders));
+            setToggleState();
+            binding.navMain.getMenu().getItem(1).setChecked(true);
         }
     }
 
@@ -254,7 +263,7 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         updateBadgeCount();
     }
 
-    public Cart getNewCart(){
+    public Cart getNewCart() {
         double price = 0;
         for (CartItem cartItem : mCartItems) {
             price = price + cartItem.getPrice();
