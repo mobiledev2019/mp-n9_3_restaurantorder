@@ -22,5 +22,9 @@ public interface CartDataSource {
         Call<List<Cart>> getCartsAdmin();
 
         Call<ResponseBody> getCartsUser(String userId);
+
+        Call<ResponseBody> updateCartStatus(long cartId, int status);
+
+        Call<ResponseBody> deleteCart(long cartId);
     }
 }

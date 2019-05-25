@@ -99,4 +99,10 @@
     <string name="text_status">Status:\u0020</string>
     <string name="action_your_orders">Your Orders</string>
     <string name="action_all_orders">All orders</string>
+    <string name="text_negative">Negative</string>
+    <string name="text_positive">Positive</string>
+    <string name="text_inform_cannot_delete">Your order has been preparing. You can not cancel.</string>
+    <string name="text_ask_delete">Are you sure to delete this order?</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_cancel">Cancel</string>
 </resources>

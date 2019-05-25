@@ -13,7 +13,6 @@ import com.e15cn2.restaurantorder.data.model.User;
 import com.e15cn2.restaurantorder.databinding.FragmentRecyclerViewBinding;
 import com.e15cn2.restaurantorder.screen.base.BaseAdapter;
 import com.e15cn2.restaurantorder.screen.base.BaseFragment;
-import com.e15cn2.restaurantorder.screen.main.admin.table.OnTableClickListener;
 import com.e15cn2.restaurantorder.screen.main.admin.table.table_details.TableDetailsDialogFragment;
 import com.e15cn2.restaurantorder.screen.main.user.home.UserHomeFragment;
 import com.e15cn2.restaurantorder.screen.main.user.reserve_table.ReserveTableDialogFragment;

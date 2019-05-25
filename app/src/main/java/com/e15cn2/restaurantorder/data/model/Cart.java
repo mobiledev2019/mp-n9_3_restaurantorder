@@ -107,6 +107,10 @@ public class Cart implements Parcelable {
         return mTime;
     }
 
+    public void setStatus(int status) {
+        mStatus = status;
+    }
+
     @Override
     public String toString() {
         return "Cart{" +

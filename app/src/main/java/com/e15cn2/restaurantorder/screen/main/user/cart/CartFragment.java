@@ -134,37 +134,4 @@ public class CartFragment extends BaseFragment<FragmentCartBinding>
         }
     }
 
-//    private void showAlertDialog() {
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        View mView = getLayoutInflater().inflate(R.layout.dialog_inform_order_success, null);
-//        builder.setCancelable(false);
-//        builder.setView(mView);
-//        final AlertDialog alertDialog = builder.create();
-//        TextView message = mView.findViewById(R.id.text_inform);
-//        Button buttonHome = mView.findViewById(R.id.button_home);
-//        Button ButtonContinue = mView.findViewById(R.id.button_continue);
-//        message.setText(AppContext.getInstance().getString(R.string.text_inform_order_success));
-//        buttonHome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ActivityUtils.replaceFragment(
-//                        getFragmentManager(),
-//                        R.id.frame_main,
-//                        UserHomeFragment.newInstance(mCart.getUser()));
-//                alertDialog.dismiss();
-//            }
-//        });
-//
-//        ButtonContinue.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ActivityUtils.replaceFragment(
-//                        getFragmentManager(),
-//                        R.id.frame_main,
-//                        MenuFragment.newInstance(mCart.getUser()));
-//                alertDialog.dismiss();
-//            }
-//        });
-//        alertDialog.show();
-//    }
 }

@@ -153,14 +153,14 @@ public class BindingUtils {
 
     @BindingAdapter("cartStatus")
     public static void setCartStatus(TextView textStatus, int status) {
-        if (status == Constants.JsonCartKey.STATUS_CANCEL) {
-            textStatus.setText("CANCEL");
+        if (status == Constants.JsonCartKey.STATUS_CANCELED) {
+            textStatus.setText(Constants.TabName.CANCELED);
         } else if (status == Constants.JsonCartKey.STATUS_PROGRESS) {
-            textStatus.setText("IN PROGRESS");
+            textStatus.setText(Constants.TabName.IN_PROGRESS);
         } else if (status == Constants.JsonCartKey.STATUS_DISTRIBUTED) {
-            textStatus.setText("DISTRIBUTED");
+            textStatus.setText(Constants.TabName.DISTRIBUTED);
         } else {
-            textStatus.setText("PAID");
+            textStatus.setText(Constants.TabName.PAID);
         }
     }
 }

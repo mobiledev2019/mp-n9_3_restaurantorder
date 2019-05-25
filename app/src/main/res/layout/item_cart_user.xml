@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="listener"
+            type="com.e15cn2.restaurantorder.screen.main.admin.cart.list_cart.OnCartClickListener" />
         <variable
             name="item"
             type="com.e15cn2.restaurantorder.data.model.Cart" />
@@ -19,7 +21,8 @@
         android:layout_margin="@dimen/dp_4"
         android:background="?android:selectableItemBackground"
         android:elevation="@dimen/dp_4"
-        app:cardCornerRadius="@dimen/dp_4">
+        app:cardCornerRadius="@dimen/dp_4"
+        android:onLongClick="@{(view)->listener.onLongClicked(item,position)}">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"

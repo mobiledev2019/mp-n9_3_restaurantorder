@@ -21,6 +21,8 @@ public class Constants {
         public static final String UPLOAD_CART_ITEM = "upload_cart_item.php";
         public static final String ADMIN_GET_CARTS = "admin_get_carts.php";
         public static final String USER_GET_CARTS = "user_get_carts.php";
+        public static final String UPDATE_CART_STATUS = "update_cart_status.php";
+        public static final String DELETE_CART = "delete_cart.php";
     }
 
     public class JSonKey {
@@ -30,6 +32,7 @@ public class Constants {
         public static final String MESSAGE_OUTPUT = "output";
         public static final String PARAMETERS_MISSING = "PARAMETERS MISSING";
         public static final String INVALID_REQUEST = "INVALID_REQUEST";
+        public static final String MESSAGE_DELETE_SUCCESS = "DELETE_SUCCESS";
     }
 
     public class JsonCommonKey {
@@ -108,10 +111,10 @@ public class Constants {
         public static final String TIME = "time";
         public static final String CART_STATUS = "cart_status";
         public static final String CART_ITEMS = "cart_items";
-        public static final int STATUS_PROGRESS = 1;
-        public static final int STATUS_CANCEL = 0;
-        public static final int STATUS_DISTRIBUTED = 2;
-        public static final int STATUS_PAID = 3;
+        public static final int STATUS_PROGRESS = 0;
+        public static final int STATUS_CANCELED = 3;
+        public static final int STATUS_DISTRIBUTED = 1;
+        public static final int STATUS_PAID = 2;
     }
 
     public class JsonCartItemKey {
@@ -120,5 +123,12 @@ public class Constants {
         public static final String QUANTITY = "quantity";
         public static final String PRICE = "cart_item_price";
         public static final String CART_ID = "cart_id";
+    }
+
+    public class TabName {
+        public static final String IN_PROGRESS = "IN PROGRESS";
+        public static final String DISTRIBUTED = "DISTRIBUTED";
+        public static final String PAID = "PAID";
+        public static final String CANCELED = "CANCELED";
     }
 }

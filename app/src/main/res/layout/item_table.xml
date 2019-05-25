@@ -10,7 +10,7 @@
 
         <variable
             name="listener"
-            type="com.e15cn2.restaurantorder.screen.main.admin.table.OnTableClickListener" />
+            type="com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.OnTableClickListener" />
 
         <variable
             name="item"

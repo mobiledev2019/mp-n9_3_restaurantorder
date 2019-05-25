@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserOrderDetailContract {
     interface Presenter {
         void getOrders(String userId);
+
+        void deleteCart(long cartId);
     }
 
     interface View {

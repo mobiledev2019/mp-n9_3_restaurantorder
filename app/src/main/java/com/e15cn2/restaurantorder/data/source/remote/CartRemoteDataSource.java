@@ -39,6 +39,16 @@ public class CartRemoteDataSource implements CartDataSource.Remote {
         return getCartsDetailUser(userId);
     }
 
+    @Override
+    public Call<ResponseBody> updateCartStatus(long cartId, int status) {
+        return AppConfig.getApiConfig().updateCartStatus(cartId, status);
+    }
+
+    @Override
+    public Call<ResponseBody> deleteCart(long cartId) {
+        return AppConfig.getApiConfig().deleteCart(cartId);
+    }
+
     private Call<ResponseBody> uploadCartUser(long cartId, String userId, String tableNumber, double price) {
         return AppConfig.getApiConfig().uploadCart(cartId, userId, tableNumber, price);
     }

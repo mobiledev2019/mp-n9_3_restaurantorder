@@ -109,5 +109,12 @@ public interface ApiConfig {
     @POST(Constants.Network.USER_GET_CARTS)
     Call<ResponseBody> getCartsUser(@Field(Constants.JsonUserKey.USER_ID) String userId);
 
+    @FormUrlEncoded
+    @POST(Constants.Network.UPDATE_CART_STATUS)
+    Call<ResponseBody> updateCartStatus(@Field(Constants.JsonCartKey.ID) long id,
+                                        @Field(Constants.JsonCartKey.CART_STATUS) int status);
 
+    @FormUrlEncoded
+    @POST(Constants.Network.DELETE_CART)
+    Call<ResponseBody> deleteCart(@Field(Constants.JsonCartKey.ID) long id);
 }

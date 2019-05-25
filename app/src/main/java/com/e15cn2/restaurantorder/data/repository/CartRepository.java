@@ -42,4 +42,14 @@ public class CartRepository implements CartDataSource.Remote {
     public Call<ResponseBody> getCartsUser(String userId) {
         return mRemote.getCartsUser(userId);
     }
+
+    @Override
+    public Call<ResponseBody> updateCartStatus(long cartId, int status) {
+        return mRemote.updateCartStatus(cartId, status);
+    }
+
+    @Override
+    public Call<ResponseBody> deleteCart(long cartId) {
+        return mRemote.deleteCart(cartId);
+    }
 }

@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,7 @@ public class TableDetailsDialogFragment extends DialogFragment
 
     @Override
     public void showMessage(String msg) {
-        //Delete action
+        //update action
         if (msg.equals(Constants.JSonKey.MESSAGE_SUCCESS)) {
             //TODO handle success event
         } else {

@@ -80,4 +80,29 @@ public class UserOrderDetailPresenter implements UserOrderDetailContract.Present
                     }
                 });
     }
+
+    @Override
+    public void deleteCart(long cartId) {
+        mCartRepository.deleteCart(cartId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        String message = jsonObject.getString(Constants.JSonKey.MESSAGE);
+                        mView.showMessage(message);
+                    } catch (JSONException e) {
+                        mView.showError(e);
+                    } catch (IOException e) {
+                        mView.showError(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mView.showMessage(t.getMessage());
+            }
+        });
+    }
 }
