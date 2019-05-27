@@ -3,6 +3,9 @@ package com.e15cn2.restaurantorder.screen.main.admin.item;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Item;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
-        implements AdminItemContract.View, AdminOnItemClickListener {
+        implements AdminItemContract.View, AdminOnItemClickListener, SearchView.OnQueryTextListener {
     private static final String ARGUMENT_MENU = "ARGUMENT_MENU";
     private AdminItemContract.Presenter mPresenter;
     private BaseAdapter<Item> mAdapter;
@@ -48,6 +51,7 @@ public class AdminItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
         binding.recyclerView.addItemDecoration(
                 new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(mAdapter);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -98,5 +102,25 @@ public class AdminItemFragment extends BaseFragment<FragmentRecyclerViewBinding>
     @Override
     public void onButtonOffClicked(Item item, int position) {
         mPresenter.updateItemStatus(item.getId(), Constants.JsonItemKey.IS_OFF);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(android.view.Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.admin_home, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        mAdapter.getFilter().filter(s);
+        return true;
     }
 }

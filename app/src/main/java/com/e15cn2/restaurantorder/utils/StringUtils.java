@@ -1,11 +1,16 @@
 package com.e15cn2.restaurantorder.utils;
 
+import android.text.TextUtils;
 import android.widget.EditText;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -113,5 +118,26 @@ public class StringUtils {
         String MM = date.substring(0, 3);
         String yyyy = date.substring(6, 10);
         return dd + MM + yyyy;
+    }
+
+    public static String currencyFormat(double price) {
+        NumberFormat format =
+                new DecimalFormat("#,##0.00");// #,##0.00 ¤ (¤:// Currency symbol)
+        format.setCurrency(Currency.getInstance(Locale.US));//Or default locale
+
+        String currency = String.valueOf(price);
+        currency = (!TextUtils.isEmpty(currency)) ? currency : "0";
+        currency = currency.trim();
+        currency = format.format(Double.parseDouble(currency));
+        currency = currency.replaceAll(",", "\\.");
+
+        if (currency.endsWith(".00")) {
+            int centsIndex = currency.lastIndexOf(".00");
+            if (centsIndex != -1) {
+                currency = currency.substring(0, centsIndex);
+            }
+        }
+        currency = String.format("%s đ", currency);
+        return currency;
     }
 }

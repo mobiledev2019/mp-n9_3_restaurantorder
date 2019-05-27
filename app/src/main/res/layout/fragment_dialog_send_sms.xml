@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.e15cn2.restaurantorder.data.model.Cart" />
+
+        <variable
+            name="listener"
+            type="com.e15cn2.restaurantorder.screen.main.admin.cart.dialog_send_sms.SendSMSDialogFragment" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_16">
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@drawable/bg_button_landing"
+            android:drawableLeft="@drawable/ic_send_white"
+            android:drawablePadding="@dimen/dp_8"
+            android:minHeight="0dp"
+            android:onClick="@{()->listener.onSend()}"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_8"
+            android:text="Send"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_phone"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/text_phone"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/edit_text"
+            android:drawableLeft="@drawable/ic_phone_orange_small"
+            android:drawablePadding="@dimen/dp_8"
+            android:ellipsize="end"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/text_phone_number"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:padding="@dimen/dp_8"
+            android:text="@{item.user.phone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

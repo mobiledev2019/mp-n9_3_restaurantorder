@@ -53,6 +53,7 @@ public class CartStatusDialogFragment extends DialogFragment
                 CartRepository.getInstance(CartRemoteDataSource.getInstance()), this);
         if (getArguments() != null) {
             mCart = getArguments().getParcelable(ARGUMENT_CART);
+            mBinding.setItem(mCart);
         }
     }
 

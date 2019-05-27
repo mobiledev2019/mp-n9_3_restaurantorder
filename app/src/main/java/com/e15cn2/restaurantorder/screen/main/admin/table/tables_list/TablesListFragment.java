@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.e15cn2.restaurantorder.R;
 import com.e15cn2.restaurantorder.data.model.Table;
@@ -24,7 +27,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.e15cn2.restaurantorder.utils.Constants.UserKey.IS_ADMIN;
 
 public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding>
-        implements OnTableClickListener {
+        implements OnTableClickListener, SearchView.OnQueryTextListener {
     private static final String EXTRA_POSITION
             = "com.e15cn2.restaurantorder.screen.main.admin.table.tables_list.EXTRA_POSITION";
     private static final String EXTRA_STATUS
@@ -95,6 +98,7 @@ public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding
             mAdapter.setData(mTables);
             mAdapter.setListener(this);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -126,5 +130,24 @@ public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding
 
     public interface OnTableClickListener {
         void onMakeAnOrder(Table table);
+    }
+    @Override
+    public void onCreateOptionsMenu(android.view.Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.admin_home, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        mAdapter.getFilter().filter(s);
+        return true;
     }
 }

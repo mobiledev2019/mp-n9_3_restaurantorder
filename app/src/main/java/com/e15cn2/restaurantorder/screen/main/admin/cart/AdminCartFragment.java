@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.e15cn2.restaurantorder.screen.main.admin.cart.list_cart.AdminListCartFragment.ACTION_RELOAD;
+import static com.e15cn2.restaurantorder.screen.main.admin.cart.list_cart.AdminListCartFragment.ACTION_SEND;
 import static com.e15cn2.restaurantorder.screen.main.admin.cart.list_cart.AdminListCartFragment.EXTRA_CURRENT_TAB;
 import static com.e15cn2.restaurantorder.screen.main.admin.cart.list_cart.AdminListCartFragment.EXTRA_RELOAD;
 
@@ -44,6 +45,7 @@ public class AdminCartFragment extends BaseFragment<FragmentCartAdminBinding>
                 CartRepository.getInstance(CartRemoteDataSource.getInstance()), this);
         mPresenter.getCarts();
         getActivity().registerReceiver(new FragmentReceiver(), new IntentFilter(ACTION_RELOAD));
+        getActivity().registerReceiver(new FragmentReceiver(), new IntentFilter(ACTION_SEND));
     }
 
     @Override
@@ -93,6 +95,7 @@ public class AdminCartFragment extends BaseFragment<FragmentCartAdminBinding>
                 mCurrentTab = intent.getIntExtra(EXTRA_CURRENT_TAB, 0);
                 mPresenter.getCarts();
             }
+
         }
     }
 }

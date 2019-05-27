@@ -1,7 +1,5 @@
 package com.e15cn2.restaurantorder.data.source.remote;
 
-import android.util.Log;
-
 import com.e15cn2.restaurantorder.data.model.Menu;
 import com.e15cn2.restaurantorder.data.source.MenuDataSource;
 import com.e15cn2.restaurantorder.utils.network.AppConfig;
@@ -36,7 +34,7 @@ public class MenuRemoteDataSource implements MenuDataSource.Remote {
         return call;
     }
 
-    private Call<List<Menu>> getMenusAdmin(){
+    private Call<List<Menu>> getMenusAdmin() {
         Call<List<Menu>> call = AppConfig.getApiConfig().getMenusAdmin();
         return call;
     }

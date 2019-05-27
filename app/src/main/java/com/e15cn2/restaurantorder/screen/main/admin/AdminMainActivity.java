@@ -35,6 +35,8 @@ public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
         MenuFragment.OnMenuClickListener {
     public static final String EXTRA_USER =
             "com.e15cn2.restaurantorder.screen.main.admin.EXTRA_USER";
+    private static final String URI_SMS = "smsto:";
+    private static final String EXTRA_SMS_BODY = "sms_body";
     private User mUser;
     private String mFragmentClassName;
 

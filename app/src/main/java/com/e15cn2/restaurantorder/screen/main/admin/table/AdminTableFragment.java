@@ -120,4 +120,5 @@ public class AdminTableFragment extends BaseFragment<FragmentTableAdminBinding>
         binding.viewPager.setAdapter(mPagerAdapter);
         binding.tabType.setupWithViewPager(binding.viewPager);
     }
+
 }

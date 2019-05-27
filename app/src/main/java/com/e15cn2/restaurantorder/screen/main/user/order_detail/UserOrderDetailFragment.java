@@ -84,6 +84,11 @@ public class UserOrderDetailFragment extends BaseFragment<FragmentRecyclerViewBi
         return true;
     }
 
+    @Override
+    public void onSendSMS(Cart cart) {
+        //Belong to admin screen
+    }
+
     private void showAlertDialog(final Cart cart, final int position) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View mView = getLayoutInflater().inflate(R.layout.dialog_inform_yes_no, null);
