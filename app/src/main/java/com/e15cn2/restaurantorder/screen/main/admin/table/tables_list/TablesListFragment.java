@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static com.e15cn2.restaurantorder.utils.Constants.JsonCommonKey.IS_ON;
 import static com.e15cn2.restaurantorder.utils.Constants.UserKey.IS_ADMIN;
 
 public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding>
@@ -105,10 +106,14 @@ public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding
     public void onTableClicked(Table table, int position) {
         if (mUser.getIsAdmin() != IS_ADMIN && mAction.equals(UserHomeFragment.Action.RESERVE)) {
             assert getFragmentManager() != null;
-            ReserveTableDialogFragment.newInstance(table, mUser)
-                    .show(getFragmentManager(), null);
+            if (table.getStatus() == IS_ON) {
+                ReserveTableDialogFragment.newInstance(table, mUser)
+                        .show(getFragmentManager(), null);
+            }
         } else if (mUser.getIsAdmin() != IS_ADMIN && mAction.equals(UserHomeFragment.Action.ORDER)) {
-            mCallback.onMakeAnOrder(table);
+            if (table.getStatus() == IS_ON || table.getCurrentUserId().equals(mUser.getId())) {
+                mCallback.onMakeAnOrder(table);
+            }
         } else {
             TableDetailsDialogFragment dialog = TableDetailsDialogFragment.newInstance(table, position);
             dialog.setTargetFragment(this, REQUEST_DIALOG);
@@ -131,12 +136,15 @@ public class TablesListFragment extends BaseFragment<FragmentRecyclerViewBinding
     public interface OnTableClickListener {
         void onMakeAnOrder(Table table);
     }
+
     @Override
     public void onCreateOptionsMenu(android.view.Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.admin_home, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(this);
+        if (mUser.getIsAdmin() == IS_ADMIN) {
+            inflater.inflate(R.menu.admin_home, menu);
+            MenuItem searchItem = menu.findItem(R.id.action_search);
+            SearchView searchView = (SearchView) searchItem.getActionView();
+            searchView.setOnQueryTextListener(this);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

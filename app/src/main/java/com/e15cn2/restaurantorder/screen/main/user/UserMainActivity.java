@@ -81,6 +81,8 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         if (mFragmentClassName.equals(UserHomeFragment.class.getName())
                 || mFragmentClassName.equals(UserOrderDetailFragment.class.getName())) {
             return;
+        } else if (mFragmentClassName.equals(CartFragment.class.getName())) {
+            actionNavigation(MenuFragment.newInstance(mUser));
         } else if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
             binding.drawerMain.closeDrawer(GravityCompat.START);
         } else {
@@ -143,7 +145,11 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
             binding.includeAppBarMain.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getSupportFragmentManager().popBackStack();
+                    if (mFragmentClassName.equals(CartFragment.class.getName())) {
+                        actionNavigation(MenuFragment.newInstance(mUser));
+                    } else {
+                        getSupportFragmentManager().popBackStack();
+                    }
                 }
             });
         }
@@ -241,7 +247,13 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         for (CartItem cartItem : cartItems) {
             price = price + cartItem.getPrice();
         }
-        Cart cart = new Cart(System.currentTimeMillis(), mUser, mTable, cartItems, price);
+        Cart cart = new Cart.Builder()
+                .setId(System.currentTimeMillis())
+                .setUser(mUser)
+                .setTable(mTable)
+                .setCartItems(cartItems)
+                .setPrice(price)
+                .build();
         return cart;
     }
 
@@ -268,7 +280,13 @@ public class UserMainActivity extends BaseActivity<ActivityUserMainBinding>
         for (CartItem cartItem : mCartItems) {
             price = price + cartItem.getPrice();
         }
-        Cart cart = new Cart(System.currentTimeMillis(), mUser, mTable, mCartItems, price);
+        Cart cart = new Cart.Builder()
+                .setId(System.currentTimeMillis())
+                .setUser(mUser)
+                .setTable(mTable)
+                .setCartItems(mCartItems)
+                .setPrice(price)
+                .build();
         return cart;
     }
 }

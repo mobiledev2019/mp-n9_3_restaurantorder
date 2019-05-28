@@ -18,8 +18,8 @@ import retrofit2.http.POST;
 public interface ApiConfig {
     @FormUrlEncoded
     @POST(Constants.Network.SIGN_UP)
-    Call<ResponseBody> signUp(@Field(Constants.JsonUserKey.ID) String id,
-                              @Field(Constants.JsonUserKey.NAME) String name,
+    Call<ResponseBody> signUp(@Field(Constants.JsonUserKey.USER_ID) String id,
+                              @Field(Constants.JsonUserKey.USER_NAME) String name,
                               @Field(Constants.JsonUserKey.DOB) String dob,
                               @Field(Constants.JsonUserKey.EMAIL) String email,
                               @Field(Constants.JsonUserKey.PHONE) String phone,
@@ -117,4 +117,8 @@ public interface ApiConfig {
     @FormUrlEncoded
     @POST(Constants.Network.DELETE_CART)
     Call<ResponseBody> deleteCart(@Field(Constants.JsonCartKey.ID) long id);
+
+    @FormUrlEncoded
+    @POST(Constants.Network.ADMIN_STATISTICS)
+    Call<ResponseBody> getCartsByYear(@Field(Constants.JsonCartKey.STATISTICS_YEAR) int year);
 }

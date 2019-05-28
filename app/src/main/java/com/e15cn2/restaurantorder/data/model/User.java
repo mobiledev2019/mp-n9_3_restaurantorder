@@ -50,8 +50,8 @@ public class User implements Parcelable {
     }
 
     public User(JSONObject jsonObject) throws JSONException {
-        mId = jsonObject.getString(Constants.JsonUserKey.ID);
-        mName = jsonObject.getString(Constants.JsonUserKey.NAME);
+        mId = jsonObject.getString(Constants.JsonUserKey.USER_ID);
+        mName = jsonObject.getString(Constants.JsonUserKey.USER_NAME);
         mDob = jsonObject.getString(Constants.JsonUserKey.DOB);
         mEmail = jsonObject.getString(Constants.JsonUserKey.EMAIL);
         mPhone = jsonObject.getString(Constants.JsonUserKey.PHONE);

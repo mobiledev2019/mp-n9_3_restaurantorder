@@ -24,6 +24,7 @@ import com.e15cn2.restaurantorder.screen.main.admin.add_menu.AddMenuFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.add_table.AddTableFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.cart.AdminCartFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.menu.MenuFragment;
+import com.e15cn2.restaurantorder.screen.main.admin.statistics.AdminStatisticsFragment;
 import com.e15cn2.restaurantorder.screen.main.admin.table.AdminTableFragment;
 import com.e15cn2.restaurantorder.utils.ActivityUtils;
 import com.e15cn2.restaurantorder.utils.SharedPreferenceUtils;
@@ -35,8 +36,6 @@ public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
         MenuFragment.OnMenuClickListener {
     public static final String EXTRA_USER =
             "com.e15cn2.restaurantorder.screen.main.admin.EXTRA_USER";
-    private static final String URI_SMS = "smsto:";
-    private static final String EXTRA_SMS_BODY = "sms_body";
     private User mUser;
     private String mFragmentClassName;
 
@@ -66,7 +65,8 @@ public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
     public void onBackPressed() {
         if (mFragmentClassName.equals(MenuFragment.class.getName())
                 || mFragmentClassName.equals(AdminTableFragment.class.getName())
-                || mFragmentClassName.equals(AdminCartFragment.class.getName())) {
+                || mFragmentClassName.equals(AdminCartFragment.class.getName())
+                || mFragmentClassName.equals(AdminStatisticsFragment.class.getName())) {
             return;
         } else if (binding.drawerMain.isDrawerOpen(GravityCompat.START)) {
             binding.drawerMain.closeDrawer(GravityCompat.START);
@@ -89,6 +89,9 @@ public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
                 break;
             case R.id.action_table:
                 actionNavigation(AdminTableFragment.newInstance(mUser));
+                break;
+            case R.id.action_statistics:
+                actionNavigation(AdminStatisticsFragment.newInstance());
                 break;
             case R.id.action_sign_out:
                 signOut();
@@ -189,6 +192,10 @@ public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
             binding.navMain.getMenu().getItem(3).setChecked(true);
         } else if (mFragmentClassName.equals(AddTableFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_add_new_table));
+        } else if (mFragmentClassName.equals(AdminStatisticsFragment.class.getName())) {
+            binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_statistics));
+            setToggleState();
+            binding.navMain.getMenu().getItem(4).setChecked(true);
         }
     }
 

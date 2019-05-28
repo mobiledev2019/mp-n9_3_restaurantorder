@@ -4,10 +4,10 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/action_home"
-            android:icon="@drawable/ic_home"
-            android:title="@string/action_home" />
+        <!--<item-->
+            <!--android:id="@+id/action_home"-->
+            <!--android:icon="@drawable/ic_home"-->
+            <!--android:title="@string/action_home" />-->
         <item
             android:id="@+id/action_all_orders"
             android:icon="@drawable/ic_order_details"
@@ -20,6 +20,10 @@
             android:id="@+id/action_table"
             android:icon="@drawable/ic_table"
             android:title="@string/action_table" />
+        <item
+            android:id="@+id/action_statistics"
+            android:icon="@drawable/ic_statistics"
+            android:title="@string/action_statistics" />
     </group>
 
     <item android:title="@string/text_more">

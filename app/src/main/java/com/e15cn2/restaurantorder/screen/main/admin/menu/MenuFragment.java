@@ -205,10 +205,12 @@ public class MenuFragment extends BaseFragment<FragmentRecyclerViewBinding>
 
     @Override
     public void onCreateOptionsMenu(android.view.Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.admin_home, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(this);
+        if (mUser.getIsAdmin() == IS_ADMIN) {
+            inflater.inflate(R.menu.admin_home, menu);
+            MenuItem searchItem = menu.findItem(R.id.action_search);
+            SearchView searchView = (SearchView) searchItem.getActionView();
+            searchView.setOnQueryTextListener(this);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

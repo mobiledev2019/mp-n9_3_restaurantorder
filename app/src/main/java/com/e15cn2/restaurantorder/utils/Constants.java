@@ -23,6 +23,7 @@ public class Constants {
         public static final String USER_GET_CARTS = "user_get_carts.php";
         public static final String UPDATE_CART_STATUS = "update_cart_status.php";
         public static final String DELETE_CART = "delete_cart.php";
+        public static final String ADMIN_STATISTICS = "admin_statistics.php";
     }
 
     public class JSonKey {
@@ -77,9 +78,11 @@ public class Constants {
         public static final String TYPE = "type";
         public static final String NUMBER = "number";
         public static final String TABLE_STATUS = "table_status";
+        public static final String CURRENT_USER_ID = "current_user_id";
     }
 
     public class JSonTableBookingKey extends JsonCommonKey {
+        public static final String BOOKING_ID = "booking_id";
         public static final String TABLE_NUMBER = "table_number";
         public static final String TIME_BOOKING = "time_booking";
         public static final String USER_NAME = "user_name";
@@ -104,6 +107,7 @@ public class Constants {
     public class JsonCartKey extends JsonCommonKey {
         public static final String ID = "cart_id";
         public static final String USER_ID = "user_id";
+        public static final String USER_NAME = "user_name";
         public static final String USER = "user";
         public static final String TABLE = "table";
         public static final String TABLE_NUMBER = "table_number";
@@ -111,6 +115,7 @@ public class Constants {
         public static final String TIME = "time";
         public static final String CART_STATUS = "cart_status";
         public static final String CART_ITEMS = "cart_items";
+        public static final String STATISTICS_YEAR = "statistics_year";
         public static final int STATUS_PROGRESS = 0;
         public static final int STATUS_CANCELED = 3;
         public static final int STATUS_DISTRIBUTED = 1;

@@ -25,6 +25,7 @@ public class MyNotificationManager {
     private final String ID_BIG_NOTIFICATION_CHANNEL = "ID_BIG_NOTIFICATION_CHANNEL";
     private final String ID_SMALL_NOTIFICATION_CHANNEL = "ID_SMALL_NOTIFICATION_CHANNEL";
     private int mId;
+    private int RQC  = 1111;
     private Context mContext;
 
     public MyNotificationManager() {
@@ -46,7 +47,7 @@ public class MyNotificationManager {
 
         PendingIntent resultPendingIntent = PendingIntent.getActivity(
                 mContext,
-                mId,
+                RQC,
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
@@ -86,7 +87,7 @@ public class MyNotificationManager {
 
         PendingIntent resultPendingIntent = PendingIntent.getActivity(
                 mContext,
-                mId,
+                RQC,
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );

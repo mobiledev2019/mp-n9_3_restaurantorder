@@ -116,4 +116,9 @@
     <string name="text_paid">Paid</string>
     <string name="text_distributed">Distributed</string>
     <string name="text_in_progress">In Progress</string>
+    <!--statistics-->
+    <string name="action_statistics">Statistics</string>
+    <string name="text_chart_income_fokllowing_cart">Income following carts</string>
+    <string name="text_search_statistics">Year statistics...</string>
+    <string name="text_tap_to_show">Tap to show chart</string>
 </resources>

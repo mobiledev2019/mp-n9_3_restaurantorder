@@ -24,59 +24,14 @@ public class Cart implements Parcelable {
     @SerializedName(Constants.JsonCartKey.TIME)
     private String mTime;
 
-    public Cart(long id, User user, Table table, List<CartItem> cartItems, double price) {
-        mId = id;
-        mUser = user;
-        mTable = table;
-        mCartItems = cartItems;
-        mPrice = price;
-    }
-
-    public Cart(long id, Table table, List<CartItem> cartItems, double price, int status, String time) {
-        mId = id;
-        mTable = table;
-        mCartItems = cartItems;
-        mPrice = price;
-        mStatus = status;
-        mTime = time;
-    }
-
-    protected Cart(Parcel in) {
-        mId = in.readLong();
-        mUser = in.readParcelable(User.class.getClassLoader());
-        mTable = in.readParcelable(Table.class.getClassLoader());
-        mCartItems = in.createTypedArrayList(CartItem.CREATOR);
-        mPrice = in.readDouble();
-        mStatus = in.readInt();
-        mTime = in.readString();
-    }
-
-    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
-        @Override
-        public Cart createFromParcel(Parcel in) {
-            return new Cart(in);
-        }
-
-        @Override
-        public Cart[] newArray(int size) {
-            return new Cart[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(mId);
-        dest.writeParcelable(mUser, flags);
-        dest.writeParcelable(mTable, flags);
-        dest.writeTypedList(mCartItems);
-        dest.writeDouble(mPrice);
-        dest.writeInt(mStatus);
-        dest.writeString(mTime);
+    public Cart(Builder builder) {
+        mId = builder.mId;
+        mUser = builder.mUser;
+        mTable = builder.mTable;
+        mCartItems = builder.mCartItems;
+        mPrice = builder.mPrice;
+        mStatus = builder.mStatus;
+        mTime = builder.mTime;
     }
 
     public long getId() {
@@ -111,6 +66,77 @@ public class Cart implements Parcelable {
         mStatus = status;
     }
 
+    public static class Builder {
+        private long mId;
+        private User mUser;
+        private Table mTable;
+        private List<CartItem> mCartItems;
+        private double mPrice;
+        private int mStatus;
+        private String mTime;
+
+        public Builder setId(long id) {
+            mId = id;
+            return this;
+        }
+
+        public Builder setUser(User user) {
+            mUser = user;
+            return this;
+        }
+
+        public Builder setTable(Table table) {
+            mTable = table;
+            return this;
+        }
+
+        public Builder setCartItems(List<CartItem> cartItems) {
+            mCartItems = cartItems;
+            return this;
+        }
+
+        public Builder setPrice(double price) {
+            mPrice = price;
+            return this;
+        }
+
+        public Builder setStatus(int status) {
+            mStatus = status;
+            return this;
+        }
+
+        public Builder setTime(String time) {
+            mTime = time;
+            return this;
+        }
+
+        public Cart build() {
+            return new Cart(this);
+        }
+    }
+
+    protected Cart(Parcel in) {
+        mId = in.readLong();
+        mUser = in.readParcelable(User.class.getClassLoader());
+        mTable = in.readParcelable(Table.class.getClassLoader());
+        mCartItems = in.createTypedArrayList(CartItem.CREATOR);
+        mPrice = in.readDouble();
+        mStatus = in.readInt();
+        mTime = in.readString();
+    }
+
+    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
+        @Override
+        public Cart createFromParcel(Parcel in) {
+            return new Cart(in);
+        }
+
+        @Override
+        public Cart[] newArray(int size) {
+            return new Cart[size];
+        }
+    };
+
     @Override
     public String toString() {
         return "Cart{" +
@@ -122,5 +148,21 @@ public class Cart implements Parcelable {
                 ", mStatus=" + mStatus +
                 ", mTime='" + mTime + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mId);
+        dest.writeParcelable(mUser, flags);
+        dest.writeParcelable(mTable, flags);
+        dest.writeTypedList(mCartItems);
+        dest.writeDouble(mPrice);
+        dest.writeInt(mStatus);
+        dest.writeString(mTime);
     }
 }

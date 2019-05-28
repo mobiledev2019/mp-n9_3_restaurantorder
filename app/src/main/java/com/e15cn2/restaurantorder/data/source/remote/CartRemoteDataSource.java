@@ -49,6 +49,11 @@ public class CartRemoteDataSource implements CartDataSource.Remote {
         return AppConfig.getApiConfig().deleteCart(cartId);
     }
 
+    @Override
+    public Call<ResponseBody> getCartByYear(int year) {
+        return AppConfig.getApiConfig().getCartsByYear(year);
+    }
+
     private Call<ResponseBody> uploadCartUser(long cartId, String userId, String tableNumber, double price) {
         return AppConfig.getApiConfig().uploadCart(cartId, userId, tableNumber, price);
     }

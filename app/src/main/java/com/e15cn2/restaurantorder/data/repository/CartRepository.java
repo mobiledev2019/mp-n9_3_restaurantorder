@@ -52,4 +52,9 @@ public class CartRepository implements CartDataSource.Remote {
     public Call<ResponseBody> deleteCart(long cartId) {
         return mRemote.deleteCart(cartId);
     }
+
+    @Override
+    public Call<ResponseBody> getCartByYear(int year) {
+        return mRemote.getCartByYear(year);
+    }
 }

@@ -6,8 +6,11 @@ import android.os.Parcelable;
 import com.e15cn2.restaurantorder.utils.Constants;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TableBooking implements Parcelable {
-    @SerializedName(Constants.JSonTableBookingKey.ID)
+    @SerializedName(Constants.JSonTableBookingKey.BOOKING_ID)
     private long mId;
     @SerializedName(Constants.JSonTableBookingKey.TABLE_NUMBER)
     private int mTableNumber;
@@ -27,6 +30,15 @@ public class TableBooking implements Parcelable {
         mUsername = in.readString();
         mUserEmail = in.readString();
         mPhoneBooking = in.readString();
+    }
+
+    public TableBooking(JSONObject jsonObject) throws JSONException {
+        mId = jsonObject.getInt(Constants.JSonTableBookingKey.BOOKING_ID);
+        mTableNumber = jsonObject.getInt(Constants.JSonTableBookingKey.TABLE_NUMBER);
+        mTimeBooking = jsonObject.getString(Constants.JSonTableBookingKey.TIME_BOOKING);
+        mUsername = jsonObject.getString(Constants.JSonTableBookingKey.USER_NAME);
+        mUserEmail = jsonObject.getString(Constants.JSonTableBookingKey.USER_EMAIL);
+        mPhoneBooking = jsonObject.getString(Constants.JSonTableBookingKey.PHONE_BOOKING);
     }
 
     public long getId() {

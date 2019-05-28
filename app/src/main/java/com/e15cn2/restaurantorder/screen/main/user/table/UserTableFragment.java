@@ -60,9 +60,9 @@ public class UserTableFragment extends BaseFragment<FragmentTableUserBinding>
         List<String> tabs = new ArrayList<>();
         List<Fragment> fragments = new ArrayList<>();
         for (Table table : tables) {
-            if (table.getType().equals(Constants.TableKey.TYPE_4_PEOPLES) && table.getStatus() == IS_ON) {
+            if (table.getType().equals(Constants.TableKey.TYPE_4_PEOPLES)) {
                 tables4.add(table);
-            } else if (table.getType().equals(Constants.TableKey.TYPE_6_PEOPLES) && table.getStatus() == IS_ON) {
+            } else if (table.getType().equals(Constants.TableKey.TYPE_6_PEOPLES)) {
                 tables6.add(table);
             }
             if (!tabs.contains(table.getType().trim().toLowerCase())) {

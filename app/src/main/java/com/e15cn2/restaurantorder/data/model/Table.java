@@ -18,20 +18,24 @@ public class Table implements Parcelable {
     private String mType;
     @SerializedName(Constants.JsonTableKey.TABLE_STATUS)
     private int mStatus;
+    @SerializedName(Constants.JsonTableKey.CURRENT_USER_ID)
+    private String mCurrentUserId;
     @SerializedName(Constants.JsonTableKey.TABLE_BOOKINGS)
     private List<TableBooking> mTableBookings;
-
-    protected Table(Parcel in) {
-        mNumber = in.readString();
-        mType = in.readString();
-        mStatus = in.readInt();
-        mTableBookings = in.createTypedArrayList(TableBooking.CREATOR);
-    }
 
     public Table(JSONObject jsonObject) throws JSONException {
         mNumber = jsonObject.getString(Constants.JsonTableKey.NUMBER);
         mType = jsonObject.getString(Constants.JsonTableKey.TYPE);
         mStatus = jsonObject.getInt(Constants.JsonTableKey.TABLE_STATUS);
+    }
+
+
+    protected Table(Parcel in) {
+        mNumber = in.readString();
+        mType = in.readString();
+        mStatus = in.readInt();
+        mCurrentUserId = in.readString();
+        mTableBookings = in.createTypedArrayList(TableBooking.CREATOR);
     }
 
     public static final Creator<Table> CREATOR = new Creator<Table>() {
@@ -45,6 +49,20 @@ public class Table implements Parcelable {
             return new Table[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mNumber);
+        dest.writeString(mType);
+        dest.writeInt(mStatus);
+        dest.writeString(mCurrentUserId);
+        dest.writeTypedList(mTableBookings);
+    }
 
     public String getNumber() {
         return mNumber;
@@ -62,21 +80,12 @@ public class Table implements Parcelable {
         mStatus = status;
     }
 
+    public String getCurrentUserId() {
+        return mCurrentUserId;
+    }
+
     public List<TableBooking> getTableBookings() {
         return mTableBookings;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mNumber);
-        dest.writeString(mType);
-        dest.writeInt(mStatus);
-        dest.writeTypedList(mTableBookings);
     }
 
     @Override
@@ -85,6 +94,7 @@ public class Table implements Parcelable {
                 "mNumber='" + mNumber + '\'' +
                 ", mType='" + mType + '\'' +
                 ", mStatus=" + mStatus +
+                ", mCurrentUserId='" + mCurrentUserId + '\'' +
                 ", mTableBookings=" + mTableBookings +
                 '}';
     }

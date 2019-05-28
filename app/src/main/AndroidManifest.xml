@@ -17,7 +17,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".screen.main.admin.AdminMainActivity"
-            android:theme="@style/MyTheme"></activity>
+            android:theme="@style/MyTheme"
+            android:launchMode="singleInstance"></activity>
         <activity
             android:name=".screen.main.user.UserMainActivity"
             android:theme="@style/MyTheme"></activity>

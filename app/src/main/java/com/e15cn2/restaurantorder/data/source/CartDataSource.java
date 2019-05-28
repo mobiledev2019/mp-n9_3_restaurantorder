@@ -26,5 +26,7 @@ public interface CartDataSource {
         Call<ResponseBody> updateCartStatus(long cartId, int status);
 
         Call<ResponseBody> deleteCart(long cartId);
+
+        Call<ResponseBody> getCartByYear(int year);
     }
 }
