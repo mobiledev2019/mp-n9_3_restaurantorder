@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "790517508589",
+    "firebase_url": "https://mp-n93restaurantorder.firebaseio.com",
+    "project_id": "mp-n93restaurantorder",
+    "storage_bucket": "mp-n93restaurantorder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790517508589:android:c580114638253b80",
+        "android_client_info": {
+          "package_name": "com.e15cn2.restaurantorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790517508589-4v2c5s66uot7nqri4hiknku37jqlodaj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCaB_c9VsoYV-PO6_0BH9LG4FOg0bkxq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790517508589-4v2c5s66uot7nqri4hiknku37jqlodaj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

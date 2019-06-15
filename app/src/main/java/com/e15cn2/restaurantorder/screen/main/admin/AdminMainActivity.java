@@ -177,7 +177,7 @@ public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
         if (mFragmentClassName.equals(MenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_menu));
             setToggleState();
-            binding.navMain.getMenu().getItem(2).setChecked(true);
+            binding.navMain.getMenu().getItem(1).setChecked(true);
         } else if (mFragmentClassName.equals(AddMenuFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.text_title_add_menu));
         } else if (mFragmentClassName.equals(AddItemFragment.class.getName())) {
@@ -185,17 +185,17 @@ public class AdminMainActivity extends BaseActivity<ActivityAdminMainBinding>
         } else if (mFragmentClassName.equals(AdminCartFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_all_orders));
             setToggleState();
-            binding.navMain.getMenu().getItem(1).setChecked(true);
+            binding.navMain.getMenu().getItem(0).setChecked(true);
         } else if (mFragmentClassName.equals(AdminTableFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_table));
             setToggleState();
-            binding.navMain.getMenu().getItem(3).setChecked(true);
+            binding.navMain.getMenu().getItem(2).setChecked(true);
         } else if (mFragmentClassName.equals(AddTableFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_add_new_table));
         } else if (mFragmentClassName.equals(AdminStatisticsFragment.class.getName())) {
             binding.includeAppBarMain.textToolbarTitle.setText(this.getString(R.string.action_statistics));
             setToggleState();
-            binding.navMain.getMenu().getItem(4).setChecked(true);
+            binding.navMain.getMenu().getItem(3).setChecked(true);
         }
     }
 
